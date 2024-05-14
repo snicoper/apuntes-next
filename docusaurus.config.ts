@@ -7,10 +7,10 @@ const config: Config = {
   tagline: 'Apuntes de Salvador Nicolas',
   favicon: 'img/favicon.ico',
 
-  // Set the production url of your site here
+  // Set the production url of your site here.
   url: 'https://apuntes-next.vercel.app/',
-  // Set the /<baseUrl>/ pathname under which your site is served
-  // For GitHub pages deployment, it is often '/<projectName>/'
+  // Set the /<baseUrl>/ pathname under which your site is served.
+  // For GitHub pages deployment, it is often '/<projectName>/'.
   baseUrl: '/',
 
   // GitHub pages deployment config.
@@ -35,8 +35,6 @@ const config: Config = {
       {
         docs: {
           sidebarPath: './sidebars.ts',
-          // Please change this to your repo.
-          // Remove this to remove the "edit this page" links.
           editUrl: 'https://github.com/snicoper/apuntes-next/blob/main/'
         },
         blog: false,
@@ -59,7 +57,7 @@ const config: Config = {
       items: [
         {
           type: 'docSidebar',
-          sidebarId: 'tutorialSidebar',
+          sidebarId: 'docsSidebar',
           position: 'left',
           label: 'Docs'
         },

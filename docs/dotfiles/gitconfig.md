@@ -18,6 +18,7 @@ id: dotfiles-gitconfig
   lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative
   co = checkout
   cm = commit
+  aw = switch
   st = status
   br = branch
 [merge]
