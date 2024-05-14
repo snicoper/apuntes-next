@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "Oh my posh"
+id: windows-oh-my-posh
 ---
 
 ## Fuentes

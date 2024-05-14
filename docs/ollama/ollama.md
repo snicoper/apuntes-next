@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "Ollama"
+id: ollama
 ---
 
 [https://ollama.com/](https://ollama.com/)

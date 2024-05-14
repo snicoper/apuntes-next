@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "Extensions"
+id: vscode-extensions
 ---
 
 ```json

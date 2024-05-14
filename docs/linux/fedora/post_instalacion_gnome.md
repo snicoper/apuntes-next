@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "Post instalación Fedora Gnome"
+id: fedora-post-instalacion-gnome
 ---
 
 ## Versión probada 40

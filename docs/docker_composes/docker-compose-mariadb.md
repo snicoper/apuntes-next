@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "Maria DB"
+id: docker-compose-mariadb
 ---
 
 ```yml

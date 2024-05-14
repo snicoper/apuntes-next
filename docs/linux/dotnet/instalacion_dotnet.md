@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "Instalación .NET"
+id: linux-dotnet-instalacion-dotnet
 ---
 
 ## Fuentes

@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "Visual studio extensions 2022"
+id: windows-visual-studio-extensions-2022
 ---
 
 - ResXManager

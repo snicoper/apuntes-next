@@ -1,5 +1,5 @@
 ---
 sidebar_position: 1
 title: ".NET"
-id: linux-dotnet
+id: net
 ---

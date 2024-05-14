@@ -1,10 +1,10 @@
 ---
 sidebar_position: 1
 title: "Markdown"
+id: vscode-snippets-markdown
 ---
 
 ```json
-{
  "Code": {
   "prefix": "_code",
   "body": [
@@ -20,8 +20,9 @@ title: "Markdown"
    "---",
    "sidebar_position: 1",
    "title: \"${1:title}\"",
+   "id: $2",
    "---\n",
-   "$2"
+   "$3"
   ],
   "description": "Titulo para docusaurus"
  },

@@ -1,6 +1,7 @@
 ---
 sidebar_position: 1
 title: "VS code"
+id: vscode
 ---
 
 En Linux, instalar fuentes Merlo para la Terminal.
