@@ -67,13 +67,13 @@ const config: Config = {
           sidebarId: 'tutorialSidebar',
           position: 'left',
           label: 'Docs'
-        }
+        },
         // { to: '/blog', label: 'Blog', position: 'left' },
-        // {
-        //   href: 'https://github.com/facebook/docusaurus',
-        //   label: 'GitHub',
-        //   position: 'right'
-        // }
+        {
+          href: 'https://github.com/snicoper/apuntes-next',
+          label: 'GitHub',
+          position: 'right'
+        }
       ]
     },
     // footer: {
