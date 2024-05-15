@@ -22,6 +22,8 @@ Abrir **PowerShell** como administrador, instalar **Meslo**.
 oh-my-posh font install
 ```
 
+`Settings` -> `PowerShell` -> `Appearance Font Face`: `MesloGL Nerd Font`
+
 ## Instalar PSReadLine
 
 Abrir **PowerShell** como usuario.

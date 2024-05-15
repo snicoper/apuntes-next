@@ -23,5 +23,4 @@ services:
 volumes:
   db:
     driver: local
-
 ```

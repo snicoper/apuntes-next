@@ -4,17 +4,17 @@ title: "Extensions"
 id: vscode-extensions
 ---
 
-```json
+```bash
 # Editor.
 code --install-extension editorconfig.editorconfig
 code --install-extension henriiik.vscode-sort
 code --install-extension aaron-bond.better-comments
 
 ## AI.
-# code --install-extension ex3ndr.llama-coder
+code --install-extension ex3ndr.llama-coder
 
 ## Especificos en Windows.
-# code --install-extension ms-vscode.powershell
+code --install-extension ms-vscode.powershell
 
 # Spell.
 code --install-extension streetsidesoftware.code-spell-checker
@@ -71,5 +71,4 @@ code --install-extension beardedbear.beardedtheme # -> "workbench.colorTheme": "
 
 ## Formateador de código CSharp. ##
 # code --install-extension csharpier.csharpier-vscode
-
 ```

@@ -27,5 +27,4 @@ id: vscode-snippets-markdown
   "description": "Titulo para docusaurus"
  },
 }
-
 ```
