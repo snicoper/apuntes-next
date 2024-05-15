@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: "Dot files"
+title: "Dotfiles"
 id: dotfiles
 ---
 
