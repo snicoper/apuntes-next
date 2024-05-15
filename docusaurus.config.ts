@@ -116,7 +116,9 @@ const config: Config = {
     // },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.nightOwl
+      darkTheme: prismThemes.vsDark
+      // TODO: Da error.
+      // additionalLanguages: ['cs']
     }
   } satisfies Preset.ThemeConfig
 };
