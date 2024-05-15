@@ -1,3 +1,14 @@
 {
-  "cSpell.words": ["appsettings", "dotfiles", "dotnet", "Flatpak", "linux", "serilog", "Serilog", "vimrc", "winget"]
+  "cSpell.words": [
+    "appsettings",
+    "dotfiles",
+    "dotnet",
+    "Flatpak",
+    "linux",
+    "Mediat",
+    "serilog",
+    "Serilog",
+    "vimrc",
+    "winget"
+  ]
 }

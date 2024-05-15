@@ -6,7 +6,7 @@ id: creacion-proyecto
 
 ## Añadir funcionalidades a un proyecto existente
 
-- [Funcionalidades](./funcionalidades)
+- [Features](./features/)
 
 ## Crear un proyecto de cero
 
