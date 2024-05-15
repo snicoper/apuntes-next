@@ -16,3 +16,8 @@ En Linux, instalar fuentes Merlo para la Terminal.
 [Generados de snippets](https://snippet-generator.app/?description=_log&tabtrigger=&snippet=console.log%28%29%3B&mode=vscode)
 
 Copiar los snippets de `./snippets/*.json`
+
+- [Snippets](./snipperts/snippets.md)
+- [Extensions](./extensions.md)
+- [Keybindings](./keybindings.md)
+- [Settings](./settings.md)
