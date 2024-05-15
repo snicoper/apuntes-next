@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Keybindings"
-id: vscode-keybindings
+id: keybindings
 ---
 
 ```json

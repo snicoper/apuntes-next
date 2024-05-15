@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Settings"
-id: vscode-settings
+id: settings
 ---
 
 ```json

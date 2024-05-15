@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "angular-config"
-id: dotfiles-angular-config
+id: angular-config
 ---
 
 Crear en el home `angular-config.json`

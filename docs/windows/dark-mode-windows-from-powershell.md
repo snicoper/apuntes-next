@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Poner Dark/Light mode desde PowerShell"
-id: windows-dark-mode-windows-from-powershell
+id: poner-dark-light-mode-desde-powershell
 ---
 
 ## Dark

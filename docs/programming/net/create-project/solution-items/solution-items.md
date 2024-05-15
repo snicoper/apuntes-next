@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Solution items"
-id: programming-net-configurations-solution-items
+id: solution-items
 ---
 
 - [Directory.Build.props](./directory_build_props.md)

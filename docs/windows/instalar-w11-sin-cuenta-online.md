@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Instalar windows 11 sin conectarse a la cuenta de Microsoft"
-id: windows-instalar-w11-sin-cuenta-online
+id: instalar-windows11-sin-conectarse-a-la-cuenta-de-microsoft
 ---
 
 [https://www.tomshardware.com/how-to/install-windows-11-without-microsoft-account](https://www.tomshardware.com/how-to/install-windows-11-without-microsoft-account)

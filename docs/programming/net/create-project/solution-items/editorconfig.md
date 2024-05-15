@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "editorconfig"
-id: programming-net-configurations-solution-items-editorconfig
+id: editorconfig
 ---
 
 Crear archivo `.editorconfig` en la raíz del proyecto.

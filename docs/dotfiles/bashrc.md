@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "bashrc"
-id: dotfiles-bashrc
+id: bashrc
 ---
 
 ```bash

@@ -1,7 +1,6 @@
 ---
 sidebar_position: 1
 title: "PostgreSQL"
-id: docker-compose-postgresql
 ---
 
 ```yml

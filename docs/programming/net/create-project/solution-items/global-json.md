@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "global.json"
-id: programming-net-configurations-solution-items-global_json
+id: global-json
 ---
 
 Crear archivo `global.json` en la raíz del proyecto.

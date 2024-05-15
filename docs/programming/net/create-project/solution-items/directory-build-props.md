@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Directory.Build.props"
-id: programming-net-configurations-solution-items-directory_build_props
+id: directory-build-props
 ---
 
 Crear archivo `Directory.Build.props` en la raíz del proyecto.

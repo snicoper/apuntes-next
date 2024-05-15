@@ -1,7 +1,6 @@
 ---
 sidebar_position: 1
 title: "Postfix"
-id: docker-compose-postfix
 ---
 
 ```yml

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Añadir programas al menu"
-id: linux-anadir-programas-al-menu
+id: anadir-programas-al-menu
 ---
 
 ## Rider

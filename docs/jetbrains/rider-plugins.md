@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Rider plugins"
-id: jetbrains-rider
+id: rider-plugins
 ---
 
 - Atom Material Icons

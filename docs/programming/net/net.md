@@ -1,7 +1,8 @@
 ---
 sidebar_position: 1
 title: ".NET"
-id: programming-net
+id: net
 ---
 
-- [Configuraciones](./configurations/configurations.md)
+- [Creación de proyecto](./create-project/create-project.md)
+- [Dotnet cli](./dotnet-cli.md)

@@ -1,7 +1,6 @@
 ---
 sidebar_position: 1
-title: "MSSQL"
-id: docker-compose-mysql
+title: "Maria DB"
 ---
 
 ```yml

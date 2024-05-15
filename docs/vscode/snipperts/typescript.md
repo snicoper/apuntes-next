@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Typescript"
-id: vscode-snippets-typescript
+id: typescript
 ---
 
 ```json

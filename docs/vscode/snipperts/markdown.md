@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Markdown"
-id: vscode-snippets-markdown
+id: markdown
 ---
 
 ```json

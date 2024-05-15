@@ -1,10 +1,10 @@
 ---
 sidebar_position: 1
 title: 'Apuntes next'
-id: docs
+id: apuntes-next
 ---
 
-- [Docker compose](./docker_composes/docker_composes.md)
+- [Docker compose](./docker-composes/docker-composes.md)
 - [Dotfiles](./dotfiles/dotfiles.md)
 - [Jetbrains](./jetbrains/jetbrains.md)
 - [Gnu/Linux](./linux/linux.md)

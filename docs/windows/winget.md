@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Winget"
-id: windows-winget
+id: winget
 ---
 
 List installed `(winget list) -match ' winget$'`

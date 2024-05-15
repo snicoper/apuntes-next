@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Creación de proyecto"
-id: programming-net-create-project
+id: creacion-proyecto
 ---
 
 Crear solución vacía `CleanArchitecture`

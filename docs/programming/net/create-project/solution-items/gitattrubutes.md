@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "gitattributes"
-id: programming-net-configurations-solution-items-gitattributes
+if: gitattributes
 ---
 
 Crear archivo `.gitattributes` en la raíz del proyecto.

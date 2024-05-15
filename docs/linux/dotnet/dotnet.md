@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: ".NET"
-id: linux-dotnet
+id: dotnet
 ---
 
-- [Instalación .NET](./instalacion_dotnet.md)
+- [Instalación .NET](./instalacion-dotnet.md)

@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: 'Post instalación fedora'
-id: fedora-post-instalacion
+id: post-instalacion-fedora
 ---
 
 ## Versión probada Fedora 40

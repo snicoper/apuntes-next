@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "Oh my zsh"
-id: linux-oh-my-zsh
+id: oh-my-zsh
 ---
 
 [https://github.com/robbyrussell/oh-my-zsh](https://github.com/robbyrussell/oh-my-zsh)

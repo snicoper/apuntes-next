@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "gitignore"
-id: programming-net-configurations-solution-items-gitignore
+id: gitignore
 ---
 
 Crear archivo `.gitignore` en la raíz del proyecto.
