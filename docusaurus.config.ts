@@ -116,8 +116,8 @@ const config: Config = {
     // },
     prism: {
       theme: prismThemes.github,
-      darkTheme: prismThemes.vsDark,
-      additionalLanguages: ['cs']
+      darkTheme: prismThemes.vsDark
+      // additionalLanguages: ['cs']
     }
   } satisfies Preset.ThemeConfig
 };
