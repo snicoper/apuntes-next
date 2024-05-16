@@ -10,7 +10,7 @@ id: mediatr
 
 ## Añadir a Application
 
-Añadir los paquetes `Microsoft. Extensions. Logging. Abstractions` y `MediatR` en `src/Application/Application.csproj`
+Añadir los paquetes `Microsoft.Extensions.Logging.Abstractions` y `MediatR` en `src/Application/Domain.csproj`
 
 Crear directorio `src/Application/Common/Behaviours` donde se añadirán los middlewares de **MediatR** y crear uno para manejar
 las excepciones no controladas.
@@ -133,4 +133,14 @@ internal sealed class SayHelloHandler : IRequestHandler<SayHelloQuery, string>
 }
 ```
 
-## Probar
+## Domain BaseEvent
+
+Crear `src/Domain/Common/BaseEvent.cs`
+
+```cs
+using MediatR;
+
+namespace CleanArchitecture.Domain.Common;
+
+public abstract class BaseEvent : INotification;
+```

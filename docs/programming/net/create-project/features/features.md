@@ -12,3 +12,8 @@ Algunas implementaciones pueden depender de otras, este en el orden que las impl
 - [FluentValidation](./fluent-validation.md)
 - [StyleCop](./stylecop.md)
 - [AutoMapper](./auto-mapper.md)
+- [Scrutor](./scrutor.md)
+- [CurrentUserService](./current-user-service.md)
+- [IDateTimeService](./date-time-service.md)
+- [EntityFramework](./entity-framework.md)
+- [IdentityFramework](./identity-framework.md)
