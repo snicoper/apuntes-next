@@ -87,7 +87,7 @@ Para probar que se ha añadido correctamente, editar `src/WebApi/Controllers/Hel
 
 ```cs
 using CleanArchitecture.WebApi.Infrastructure;
-using EmployeeControl.Application.Hello.Queries;
+using CleanArchitecture.Application.Hello.Queries;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CleanArchitecture.WebApi.Controllers;
@@ -110,7 +110,7 @@ Crear `src/Application/Hello/Queries/SayHelloQuery.cs`
 ```cs
 using MediatR;
 
-namespace EmployeeControl.Application.Hello.Queries;
+namespace CleanArchitecture.Application.Hello.Queries;
 
 public record SayHelloQuery : IRequest<string>;
 ```
@@ -122,7 +122,7 @@ Crear `src/Application/Hello/Queries/SayHelloHandler.cs`
 ```cs
 using MediatR;
 
-namespace EmployeeControl.Application.Hello.Queries;
+namespace CleanArchitecture.Application.Hello.Queries;
 
 internal sealed class SayHelloHandler : IRequestHandler<SayHelloQuery, string>
 {
@@ -132,3 +132,5 @@ internal sealed class SayHelloHandler : IRequestHandler<SayHelloQuery, string>
     }
 }
 ```
+
+## Probar

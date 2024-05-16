@@ -39,8 +39,8 @@ Crear proyecto `Class Library` en `src` (en el solution folder y físicamente) *
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <RootNamespace>EmployeeControl.Domain</RootNamespace>
-    <AssemblyName>EmployeeControl.Domain</AssemblyName>
+    <RootNamespace>CleanArchitecture.Domain</RootNamespace>
+    <AssemblyName>CleanArchitecture.Domain</AssemblyName>
   </PropertyGroup>
 </Project>
 ```
@@ -54,8 +54,8 @@ Se referencia con `Domain`.
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <RootNamespace>EmployeeControl.Application</RootNamespace>
-    <AssemblyName>EmployeeControl.Application</AssemblyName>
+    <RootNamespace>CleanArchitecture.Application</RootNamespace>
+    <AssemblyName>CleanArchitecture.Application</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -71,7 +71,7 @@ Crear `DependencyInjection.cs`
 ```cs
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EmployeeControl.Application;
+namespace CleanArchitecture.Application;
 
 public static class DependencyInjection
 {
@@ -91,8 +91,8 @@ Se referencia con `Application`.
 ```xml
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <RootNamespace>EmployeeControl.Infrastructure</RootNamespace>
-    <AssemblyName>EmployeeControl.Infrastructure</AssemblyName>
+    <RootNamespace>CleanArchitecture.Infrastructure</RootNamespace>
+    <AssemblyName>CleanArchitecture.Infrastructure</AssemblyName>
   </PropertyGroup>
 
   <ItemGroup>
@@ -106,7 +106,7 @@ Crear `DependencyInjection.cs`
 ```cs
 using Microsoft.Extensions.DependencyInjection;
 
-namespace EmployeeControl.Infrastructure;
+namespace CleanArchitecture.Infrastructure;
 
 public static class DependencyInjection
 {
@@ -171,8 +171,8 @@ Modificar `Program.cs`
 
 ```cs
 using Microsoftusing CleanArchitecture.WebApi;
-using EmployeeControl.Application;
-using EmployeeControl.Infrastructure;
+using CleanArchitecture.Application;
+using CleanArchitecture.Infrastructure;
 
 var builder = WebApplication.CreateBuilder(args);
 
