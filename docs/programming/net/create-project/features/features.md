@@ -18,3 +18,4 @@ Algunas implementaciones pueden depender de otras, este en el orden que las impl
 - [IDateTimeService](./date-time-service.md)
 - [EntityFramework](./entity-framework.md)
 - [IdentityFramework](./identity-framework.md)
+- [Swashbuckle](./swashbuckle.md)
