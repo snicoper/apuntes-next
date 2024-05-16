@@ -324,6 +324,33 @@ else
 {
     app.UseHsts();
 }
+
+app.UseAuthentication();
+app.UseAuthorization();
+```
+
+## Authorize
+
+Editar `src/WebApi/Infrastructure/ApiControllerBase.cs` y añadir el decorador [Authorize]
+
+```cs
+[Authorize]
+[ApiController]
+[Produces("application/json")]
+[ProducesResponseType(StatusCodes.Status401Unauthorized)]
+public class ApiControllerBase : ControllerBase
+{
+    private ISender? _sender;
+
+    protected ISender Sender => _sender ??= HttpContext.RequestServices.GetRequiredService<ISender>();
+}
+```
+
+Editar `src/WebApi/Controllers/HelloController.cs` y en el método `SayHello` añadir el decorador [AllowAnonymous].
+
+```cs
+[HttpGet]
+[AllowAnonymous]
 ```
 
 ## Migraciones

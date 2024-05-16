@@ -4,7 +4,7 @@ title: "Features"
 id: features
 ---
 
-Algunas implementaciones pueden depender de otras, este en el orden que las implemento.
+Algunas implementaciones pueden depender de otras, este es el orden que las implemento.
 
 - [Serilog](./serilog.md)
 - [MediatR](./mediatr.md)
