@@ -10,3 +10,5 @@ Algunas implementaciones pueden depender de otras, este en el orden que las impl
 - [MediatR](./mediatr.md)
 - [CustomException](./custom-exception-handler.md)
 - [FluentValidation](./fluent-validation.md)
+- [StyleCop](./stylecop.md)
+- [AutoMapper](./auto-mapper.md)
