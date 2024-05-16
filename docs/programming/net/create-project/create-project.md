@@ -4,6 +4,10 @@ title: "Creación de proyecto"
 id: creacion-proyecto
 ---
 
+## Fuentes
+
+Muchos de estos códigos se basan en los códigos de [Jason Taylor](https://github.com/jasontaylordev) y [Milan Jovanović](https://www.youtube.com/@MilanJovanovicTech)
+
 ## Código fuente
 
 [GitHub](https://github.com/snicoper/CleanArchitecture)

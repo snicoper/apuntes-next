@@ -28,12 +28,12 @@ Editar `src/WebApi/appsettings.Development.json`
 
 Cambiar el puerto según `src/WebApi/Properties/launchSettings.json`
 
-Crear `src/Application/Common/Models/Settings/JwtSettings.cs` para tipar las opciones de configuración.
+Crear `src/Application/Common/Models/Settings/Settings/JwtSettings.cs` para tipar las opciones de configuración.
 
 ```cs
 using System.ComponentModel.DataAnnotations;
 
-namespace CleanArchitecture.Application.Common.Models;
+namespace CleanArchitecture.Application.Common.Models.Settings;
 
 public class JwtSettings
 {

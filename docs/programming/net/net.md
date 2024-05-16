@@ -5,4 +5,5 @@ id: net
 ---
 
 - [Creación de proyecto](./create-project/create-project.md)
+  - [Features](./create-project/features/)
 - [Dotnet cli](./dotnet-cli.md)
