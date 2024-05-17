@@ -80,6 +80,24 @@ Editar `src/WebApi/DependencyInjection.cs` para pasar el argumento `IConfigurati
 .AddApplication(builder.Configuration)
 ```
 
+## EmailViews
+
+Constantes de las views.
+
+Crear `src/Application/Common/Constants/EmailViews.cs`
+
+```cs
+namespace CleanArchitecture.Application.Common.Constants;
+
+/// <summary>
+/// Nombres de las vistas (cshtml) para envío de Emails.
+/// </summary>
+public static class EmailViews
+{
+    public const string TestEmail = nameof(TestEmail);
+}
+```
+
 ## Exceptions
 
 Crear `src/Infrastructure/Exceptions/EmailServiceException.cs`
