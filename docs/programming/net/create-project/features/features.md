@@ -23,3 +23,4 @@ Algunas implementaciones pueden depender de otras, este es el orden que las impl
 - [EmailService](./email-service.md)
 - [Localización](./localization.md)
 - [Cors](./cors.md)
+- [RequestData y ResponseData](./request-response-data.md)
