@@ -21,3 +21,4 @@ Algunas implementaciones pueden depender de otras, este es el orden que las impl
 - [Swashbuckle](./swashbuckle.md)
 - [API Versioning](./versioning.md)
 - [EmailService](./email-service.md)
+- [Localización](./localization.md)

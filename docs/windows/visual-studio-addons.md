@@ -7,4 +7,4 @@ id: visual-studio-extensions
 - ResXManager
 - SonarLint
 - Visual Studio Spell Checker
-- Zero (Dark Theme)
+- File Icons
