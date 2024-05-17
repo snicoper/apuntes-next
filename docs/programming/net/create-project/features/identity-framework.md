@@ -62,6 +62,16 @@ public class JwtSettings
 }
 ```
 
+Editar `src/Application/Common/Models/Settings/JwtSettings.cs` y añadir
+
+```cs
+// Strongly typed options validations.
+services.AddOptions<JwtSettings>()
+    .Bind(configuration.GetSection(JwtSettings.SectionName))
+    .ValidateDataAnnotations()
+    .ValidateOnStart();
+```
+
 ## CustomClaimsPrincipalFactory
 
 Crear `src/Application/Common/Services/CustomClaimsPrincipalFactory.cs`
