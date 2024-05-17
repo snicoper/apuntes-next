@@ -165,7 +165,7 @@ public static class DependencyInjection
 {
     public static IServiceCollection AddWebApi(this IServiceCollection services)
     {
-        services.AddControllersWithViews();
+        services.AddControllers();
 
         services.AddRouting(options => { options.LowercaseUrls = true; });
 

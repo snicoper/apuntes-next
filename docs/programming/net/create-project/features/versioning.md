@@ -1,14 +1,12 @@
 ---
 sidebar_position: 1
-title: "Versioning"
-id: versioning
+title: "API Versioning"
+id: api-versioning
 ---
 
 ## Instalación
 
 Añadir paquete `Microsoft.AspNetCore.Mvc.Versioning` en `src/WebApi/WebApi.csproj`
-
-## Configuración
 
 Editar `src/WebApi/DependencyInjection.cs` y añadir:
 

@@ -19,4 +19,5 @@ Algunas implementaciones pueden depender de otras, este es el orden que las impl
 - [EntityFramework](./entity-framework.md)
 - [IdentityFramework](./identity-framework.md)
 - [Swashbuckle](./swashbuckle.md)
-- [Versioning](./versioning.md)
+- [API Versioning](./versioning.md)
+- [EmailService](./email-service.md)
