@@ -23,19 +23,24 @@ id: keybindings
     "command": "editor.action.joinLines"
   },
   {
-    // Lower case.
-    "key": "ctrl+alt+l",
-    "command": "editor.action.transformToLowercase"
-  },
-  {
     // Save all files.
     "key": "ctrl+s",
     "command": "saveAll"
   },
   {
+    // Lower case.
+    "key": "ctrl+alt+l",
+    "command": "editor.action.transformToLowercase"
+  },
+  {
     // Upper case.
     "key": "ctrl+alt+u",
     "command": "editor.action.transformToUppercase"
+  },
+  {
+    // Title case.
+    "key": "ctrl+alt+t",
+    "command": "editor.action.transformToTitlecase"
   },
   {
     // Missing all imports.
@@ -59,5 +64,4 @@ id: keybindings
     "when": "terminal.active"
   }
 ]
-
 ```
