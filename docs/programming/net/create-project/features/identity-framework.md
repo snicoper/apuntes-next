@@ -74,6 +74,17 @@ services.AddOptions<JwtSettings>()
 
 ## CustomClaimsPrincipalFactory
 
+Crear `src/Application/Common/Constants/CustomClaims.cs` para añadir claims personalizadas.
+
+```cs
+namespace CleanArchitecture.Application.Common.Constants;
+
+public static class CustomClaims
+{
+    // public const string CompanyId = "companyId";
+}
+```
+
 Crear `src/Application/Common/Services/CustomClaimsPrincipalFactory.cs`
 
 ```cs
