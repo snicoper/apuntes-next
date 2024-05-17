@@ -13,7 +13,7 @@ code --install-extension aaron-bond.better-comments
 ## AI.
 code --install-extension ex3ndr.llama-coder
 
-## Especificos en Windows.
+## Específicos en Windows.
 code --install-extension ms-vscode.powershell
 
 # Spell.
@@ -40,6 +40,7 @@ code --install-extension ms-dotnettools.vscodeintellicode-csharp
 
 # TypeScript.
 code --install-extension mariusalchimavicius.json-to-ts
+code --install-extension yoavbls.pretty-ts-errors
 
 # Angular.
 code --install-extension cyrilletuzi.angular-schematics
