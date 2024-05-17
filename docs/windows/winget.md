@@ -24,4 +24,5 @@ winget install -e --id Docker.DockerDesktop
 winget install -e --id Microsoft.PowerToys
 winget install -e --id Brave.Brave
 winget install -e --id vim.vim
+winget install -e --id CoreyButler.NVMforWindows
 ```

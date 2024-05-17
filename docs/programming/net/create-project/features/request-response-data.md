@@ -422,7 +422,6 @@ public class RequestData
 
     public string Filters { get; set; } = string.Empty;
 }
-
 ```
 
 ## ResponseData
@@ -522,5 +521,4 @@ internal class GetCompanyByCurrentUserHandler(ICompanyService companyService)
         return Result.Success(result);
     }
 }
-
 ```
