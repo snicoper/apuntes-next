@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: "VS code"
+title: "VSCode"
 id: vscode
 ---
 
