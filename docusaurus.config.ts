@@ -36,9 +36,7 @@ const config: Config = {
         googleAnalytics: {
           trackingID: 'G-0DLHMPDEF5',
           anonymizeIP: true
-        }
-      },
-      {
+        },
         docs: {
           sidebarPath: './sidebars.ts',
           editUrl: 'https://github.com/snicoper/apuntes-next/blob/main/'
