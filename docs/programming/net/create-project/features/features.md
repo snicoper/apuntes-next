@@ -22,3 +22,4 @@ Algunas implementaciones pueden depender de otras, este es el orden que las impl
 - [API Versioning](./versioning.md)
 - [EmailService](./email-service.md)
 - [Localización](./localization.md)
+- [Cors](./cors.md)
