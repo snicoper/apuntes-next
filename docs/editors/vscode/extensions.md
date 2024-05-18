@@ -11,7 +11,8 @@ code --install-extension henriiik.vscode-sort
 code --install-extension aaron-bond.better-comments
 
 ## AI.
-code --install-extension ex3ndr.llama-coder
+code --install-extension Codeium.codeium
+# code --install-extension ex3ndr.llama-coder
 
 ## Específicos en Windows.
 code --install-extension ms-vscode.powershell
@@ -53,7 +54,6 @@ code --install-extension formulahendry.auto-rename-tag
 code --install-extension mrmlnc.vscode-scss
 code --install-extension ms-vscode.live-server
 code --install-extension kisstkondoros.vscode-gutter-preview
-#code --install-extension ritwickdey.liveserver
 
 # Theme
 code --install-extension pkief.material-icon-theme
