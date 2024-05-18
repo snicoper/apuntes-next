@@ -8,3 +8,4 @@ id: rider-plugins
 - Hunspell
 - SonarLint
 - Continue
+- ChatGPT - EasyCode

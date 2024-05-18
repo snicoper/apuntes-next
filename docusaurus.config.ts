@@ -4,7 +4,7 @@ import { themes as prismThemes } from 'prism-react-renderer';
 
 const config: Config = {
   title: 'Apuntes de informática',
-  tagline: 'Apuntes de Salvador Nicolas',
+  tagline: 'Salvador Nicolas',
   favicon: 'img/favicon.ico',
 
   // Set the production url of your site here.

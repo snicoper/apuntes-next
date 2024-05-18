@@ -52,6 +52,76 @@ public abstract class Roles
 }
 ```
 
+## IUserRepository
+
+Crear `src/Domain/Repositories/IUserRepository.cs`
+
+```cs
+using CleanArchitecture.Domain.Entities;
+
+namespace CleanArchitecture.Domain.Repositories;
+
+public interface IUserRepository
+{
+    /// <summary>
+    /// Comprueba si un <see cref="ApplicationUser" /> tiene un role asignado.
+    /// </summary>
+    /// <param name="userId">Id de usuario.</param>
+    /// <param name="role">Role a verificar.</param>
+    /// <returns>True si tiene el role asignado, false en caso contrario.</returns>
+    Task<bool> IsInRoleAsync(string userId, string role);
+
+    Task<bool> AuthorizeAsync(string userId, string policyName);
+}
+```
+
+Crear `src/Infrastructure/Repositories/UserRoleRepository.cs`
+
+```cs
+using CleanArchitecture.Domain.Entities;
+using CleanArchitecture.Domain.Repositories;
+using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Identity;
+
+namespace CleanArchitecture.Infrastructure.Repositories;
+
+public class UserRoleRepository(
+    UserManager<ApplicationUser> userManager,
+    IUserClaimsPrincipalFactory<ApplicationUser> userClaimsPrincipalFactory,
+    IAuthorizationService authorizationService)
+    : IUserRepository
+{
+    public async Task<bool> IsInRoleAsync(string userId, string role)
+    {
+        var user = userManager
+            .Users
+            .SingleOrDefault(u => u.Id == userId);
+
+        var result = user != null && await userManager.IsInRoleAsync(user, role);
+
+        return result;
+    }
+
+    public async Task<bool> AuthorizeAsync(string userId, string policyName)
+    {
+        var user = userManager
+            .Users
+            .SingleOrDefault(u => u.Id == userId);
+
+        if (user is null)
+        {
+            return false;
+        }
+
+        var principal = await userClaimsPrincipalFactory.CreateAsync(user);
+
+        var result = await authorizationService.AuthorizeAsync(principal, policyName);
+
+        return result.Succeeded;
+    }
+}
+```
+
 ## AuthorizeAttribute
 
 Crear `src/Application/Common/Security/AuthorizeAttribute.cs`
@@ -93,11 +163,12 @@ using System.Reflection;
 using CleanArchitecture.Application.Common.Exceptions;
 using CleanArchitecture.Application.Common.Interfaces.Users;
 using CleanArchitecture.Application.Common.Security;
+using CleanArchitecture.Domain.Repositories;
 using MediatR;
 
 namespace CleanArchitecture.Application.Common.Behaviours;
 
-public class AuthorizationBehaviour<TRequest, TResponse>(ICurrentUserService currentUserService, IIdentityService identityService)
+public class AuthorizationBehaviour<TRequest, TResponse>(ICurrentUserService currentUserService, IUserRepository userRepository)
     : IPipelineBehavior<TRequest, TResponse>
     where TRequest : notnull
 {
@@ -143,7 +214,7 @@ public class AuthorizationBehaviour<TRequest, TResponse>(ICurrentUserService cur
             {
                 foreach (var role in roles)
                 {
-                    var isInRole = await identityService.IsInRoleAsync(userId, role.Trim());
+                    var isInRole = await userRepository.IsInRoleAsync(userId, role.Trim());
 
                     if (!isInRole)
                     {
@@ -177,7 +248,7 @@ public class AuthorizationBehaviour<TRequest, TResponse>(ICurrentUserService cur
 
         foreach (var policy in attributesWithPolicies.Select(a => a.Policy))
         {
-            var authorized = await identityService.AuthorizeAsync(userId, policy);
+            var authorized = await userRepository.AuthorizeAsync(userId, policy);
 
             if (!authorized)
             {

@@ -6,12 +6,12 @@ id: custom-exception
 
 ## Excepciones
 
-En `src/Application/Common/Exceptions` crear `ForbiddenAccessException` y `NotFoundException`.
+En `src/Application/Common/Exceptions` crear `ForbiddenAccessException` y en `src/Domain/Exceptions` crear `NotFoundException`.
 
 ### NotFoundException
 
 ```cs
-namespace CleanArchitecture.Application.Common.Exceptions;
+namespace CleanArchitecture.Domain.Exceptions;
 
 public class NotFoundException : Exception
 {
@@ -50,6 +50,7 @@ Crear `src/WebApi/Infrastructure/CustomExceptionHandler.cs`
 
 ```cs
 using CleanArchitecture.Application.Common.Exceptions;
+using CleanArchitecture.Domain.Exceptions;
 using Microsoft.AspNetCore.Diagnostics;
 using Microsoft.AspNetCore.Mvc;
 
