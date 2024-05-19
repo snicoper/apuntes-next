@@ -26,18 +26,18 @@ oh-my-posh font install
 
 ## Instalar PSReadLine
 
-Abrir **PowerShell** como usuario.
-
-```bash
-Install-Module -Name Terminal-Icons -Repository PSGallery
-```
-
-## Instalar PSGallery
-
 Iconos al hacer ls
 
 ```bash
 Install-Module PSReadLine -AllowPrerelease -Force
+```
+
+## Instalar Terminal-Icons
+
+Abrir **PowerShell** como usuario.
+
+```bash
+Install-Module -Name Terminal-Icons -Repository PSGallery
 ```
 
 ## Auto completado Git
