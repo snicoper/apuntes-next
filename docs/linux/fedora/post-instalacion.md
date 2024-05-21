@@ -98,6 +98,9 @@ flatpak install flathub com.getpostman.Postman
 
 # Insomnia.
 flatpak install flathub rest.insomnia.Insomnia
+
+# Microsoft Teams.
+flatpak install flathub com.github.IsmaelMartinez.teams_for_linux
 ```
 
 ### Postman error al hacer login
