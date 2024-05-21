@@ -32,6 +32,7 @@ sudo dnf -y install \
     p7zip-plugins \
     powerline \
     powerline-fonts \
+    openssl \
     unrar \
     vim \
     wget \
@@ -40,9 +41,8 @@ sudo dnf -y install \
 
 ## Fuentes
 
-[https://monaspace.githubnext.com/](https://monaspace.githubnext.com/)
-
-- Descargar [Meslo.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Meslo.zip)
+- [githubnext](https://monaspace.githubnext.com/)
+- [Meslo.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Meslo.zip)
 
 ```bash
 mkdir -p ~/.local/share/fonts/
@@ -87,20 +87,11 @@ sudo dnf install code -y
 ```bash
 flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
-# Gnome extensions.
-flatpak install flathub org.gnome.Extensions
-
 # Github Desktop.
 flatpak install flathub io.github.shiftey.Desktop
 
-# Jetbrains Rider.
-flatpak install flathub com.jetbrains.Rider
-
 # Dbeaver.
 flatpak install flathub io.dbeaver.DBeaverCommunity
-
-# Google Chrome.
-flatpak install flathub com.google.Chrome
 
 # Postman
 flatpak install flathub com.getpostman.Postman
