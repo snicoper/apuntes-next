@@ -34,7 +34,7 @@ id: settings
     "source.organizeImports": "explicit"
   },
   // Terminal.
-  "terminal.integrated.fontFamily": "'Monaspace Neon', monospace",
+  "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
   "terminal.integrated.fontSize": 16,
   // Prettier.
   "prettier.singleQuote": true,

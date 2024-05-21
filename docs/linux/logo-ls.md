@@ -14,13 +14,13 @@ sudo dnf install logo-ls_386.rpm
 ## Alias
 
 ```bash
-alias ils='logo-ls'
-alias ila='logo-ls -A'
-alias ill='logo-ls -al'
+alias ls='logo-ls'
+alias la='logo-ls -A'
+alias ll='logo-ls -al'
 # equivalents with Git Status on by Default
-alias ilsg='logo-ls -D'
-alias ilag='logo-ls -AD'
-alias illg='logo-ls -alD'
+alias lsg='logo-ls -D'
+alias lag='logo-ls -AD'
+alias llg='logo-ls -alD'
 ```
 
-Editar terminal y elegir fuente `Monospace Neon`
+Editar terminal y elegir fuente `MesloLGM Nerd Font`
