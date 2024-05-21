@@ -4,7 +4,7 @@ title: "PostgreSQL"
 ---
 
 ```yml
-# docker-compose -f ./docker-compose-postgres.yml up -d
+# docker compose -f ./docker-compose-postgres.yml up -d
 version: "4.0"
 services:
   db:

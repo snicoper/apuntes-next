@@ -12,7 +12,7 @@ Configuración básica de IdentityFramework.
 - Añadir `Microsoft.AspNetCore.Identity.EntityFrameworkCore` en el proyecto `src/Infrastructure/Infrastructure.csproj`
 - Añadir `Microsoft.AspNetCore.Authentication.JwtBearer` en el proyecto `src/Application/Application.csproj`
 
-## Configuración
+## JwtSettings
 
 Editar `src/WebApi/appsettings.Development.json`
 
@@ -109,7 +109,7 @@ public class CustomClaimsPrincipalFactory(UserManager<ApplicationUser> userManag
 }
 ```
 
-## Entidad ApplicationUser
+## ApplicationUser
 
 Crear `src/Domain/Entities/ApplicationUser.cs`
 
@@ -137,8 +137,6 @@ public class ApplicationUser : IdentityUser, IEntityDomainEvent
 
     public DateTimeOffset EntryDate { get; set; }
 
-    public ICollection<IdentityUserRole<string>> UserRoles { get; set; } = new List<IdentityUserRole<string>>();
-
     [NotMapped]
     public IReadOnlyCollection<BaseEvent> DomainEvents => _domainEvents.AsReadOnly();
 
@@ -155,26 +153,6 @@ public class ApplicationUser : IdentityUser, IEntityDomainEvent
     public void ClearDomainEvents()
     {
         _domainEvents.Clear();
-    }
-}
-```
-
-Crear `src/Domain/Entities/ApplicationRole.cs`
-
-```cs
-using Microsoft.AspNetCore.Identity;
-
-namespace CleanArchitecture.Domain.Entities;
-
-public class ApplicationRole : IdentityRole
-{
-    public ApplicationRole()
-    {
-    }
-
-    public ApplicationRole(string roleName)
-        : base(roleName)
-    {
     }
 }
 ```
@@ -200,12 +178,6 @@ internal class ApplicationUserConfiguration : IEntityTypeConfiguration<Applicati
 
         builder.HasIndex(au => au.RefreshToken)
             .IsUnique();
-
-        // Many-to-Many.
-        builder.HasMany(au => au.UserRoles)
-            .WithOne()
-            .HasForeignKey(uc => uc.UserId)
-            .IsRequired();
 
         // Properties.
         builder.Property(au => au.Email)
@@ -233,32 +205,13 @@ internal class ApplicationUserConfiguration : IEntityTypeConfiguration<Applicati
 }
 ```
 
-## ApplicationRoleConfiguration
-
-Crear `src/Infrastructure/Data/Configurations/ApplicationRoleConfiguration.cs`
-
-```cs
-using CleanArchitecture.Domain.Entities;
-using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Metadata.Builders;
-
-namespace CleanArchitecture.Infrastructure.Configurations;
-
-internal class ApplicationRoleConfiguration : IEntityTypeConfiguration<ApplicationRole>
-{
-    public void Configure(EntityTypeBuilder<ApplicationRole> builder)
-    {
-    }
-}
-```
-
 ## ApplicationDbContext
 
 Editar `src/Infrastructure/Data/ApplicationDbContext.cs` y remplazar por:
 
 ```cs
 public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : IdentityDbContext<ApplicationUser, ApplicationRole, string>(options), IApplicationDbContext
+    : IdentityDbContext<ApplicationUser, IdentityRole, string>(options), IApplicationDbContext
 {
     // public DbSet<Department> Departments => Set<Department>();
 
@@ -283,7 +236,7 @@ services.AddAuthorizationBuilder();
 
 services
     .AddIdentityCore<ApplicationUser>()
-    .AddRoles<ApplicationRole>()
+    .AddRoles<IdentityRole>()
     .AddEntityFrameworkStores<ApplicationDbContext>()
     .AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
     .AddDefaultTokenProviders();
