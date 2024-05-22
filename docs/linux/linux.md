@@ -10,4 +10,4 @@ id: gnu-linux
 - [Oh my zsh](./oh-my-zsh.md)
 - [logo-ls](./logo-ls.md)
 - [Ver permisos octal](./ver-permisos-octal.md)
-- [Dividir archivos PDF](./dividir-archivos-pdf.md)
+- [Archivos PDF](./archivos-pdf.md)
