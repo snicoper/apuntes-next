@@ -6,3 +6,4 @@ id: programacion
 
 - [.NET](./net/net.md)
 - [Angular](./angular/angular.md)
+- [Architecture](./architecture/architecture.md)
