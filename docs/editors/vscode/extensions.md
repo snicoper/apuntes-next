@@ -12,7 +12,6 @@ code --install-extension aaron-bond.better-comments
 
 ## AI.
 code --install-extension Codeium.codeium
-# code --install-extension ex3ndr.llama-coder
 
 ## Específicos en Windows.
 code --install-extension ms-vscode.powershell
@@ -57,19 +56,14 @@ code --install-extension kisstkondoros.vscode-gutter-preview
 
 # Theme
 code --install-extension pkief.material-icon-theme
-code --install-extension beardedbear.beardedtheme # -> "workbench.colorTheme": "Bearded Theme Anthracite",
+code --install-extension beardedbear.beardedtheme
 
 # ##############################
 # Otros themes.
 #
+# code --install-extension beardedbear.beardedtheme # -> "workbench.colorTheme": "Bearded Theme Anthracite",
 # code --install-extension EdwinSulaiman.jetbrains-rider-dark-theme
 # code --install-extension enkia.tokyo-night
 # code --install-extension uloco.theme-bluloco-dark
 # code --install-extension liviuschera.noctis
-
-# ##############################
-# Plugins interesantes
-
-## Formateador de código CSharp. ##
-# code --install-extension csharpier.csharpier-vscode
 ```
