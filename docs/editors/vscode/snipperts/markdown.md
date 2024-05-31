@@ -5,7 +5,8 @@ id: markdown
 ---
 
 ```json
- "Code": {
+{
+  "Code": {
   "prefix": "_code",
   "body": [
    "```${1:label}",
@@ -14,7 +15,7 @@ id: markdown
   ],
   "description": "Code block"
  },
- "Docusaurus_title_md": {
+  "Docusaurus_title_md": {
   "prefix": "_md_title",
   "body": [
    "---",
@@ -27,4 +28,5 @@ id: markdown
   "description": "Titulo para docusaurus"
  },
 }
+
 ```

@@ -15,7 +15,7 @@ code --install-extension Codeium.codeium
 # code --install-extension ex3ndr.llama-coder
 
 ## Específicos en Windows.
-code --install-extension ms-vscode.powershell
+# code --install-extension ms-vscode.powershell
 
 # Spell.
 code --install-extension streetsidesoftware.code-spell-checker

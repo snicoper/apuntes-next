@@ -187,5 +187,4 @@ id: settings
   },
   "inference.endpoint": "http://localhost:11434"
 }
-
 ```
