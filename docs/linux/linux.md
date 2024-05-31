@@ -8,4 +8,6 @@ id: gnu-linux
 - [Fedora](./fedora/fedora.md)
 - [Añadir programas al menu](./anadir-programas-al-menu.md)
 - [Oh my zsh](./oh-my-zsh.md)
+- [logo-ls](./logo-ls.md)
 - [Ver permisos octal](./ver-permisos-octal.md)
+- [Archivos PDF](./archivos-pdf.md)

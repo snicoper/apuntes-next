@@ -8,6 +8,7 @@ id: apuntes-next
 - [Dotfiles](./dotfiles/dotfiles.md)
 - [Editores](./editors/)
 - [Gnu/Linux](./linux/linux.md)
+- [Git](./git/git.md)
 - [Ollama](./ollama/ollama.md)
 - [Programación](./programming/programming.md)
 - [Windows](./windows/windows.md)

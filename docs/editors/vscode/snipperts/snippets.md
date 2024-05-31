@@ -6,3 +6,4 @@ id: snippets
 
 - [Markdown](./markdown.md)
 - [Typescript](./typescript.md)
+- [XML](./xml.md)

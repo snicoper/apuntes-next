@@ -7,5 +7,4 @@ id: rider-plugins
 - Atom Material Icons
 - Hunspell
 - SonarLint
-- Continue
-- ChatGPT - EasyCode
+- Codeium

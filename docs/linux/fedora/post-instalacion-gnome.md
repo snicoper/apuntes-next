@@ -20,6 +20,9 @@ sudo dnf -y install \
     gnome-tweaks \
     gparted \
     transmission-gtk
+
+# Gnome extensions.
+flatpak install flathub org.gnome.Extensions
 ```
 
 ## Firewalld

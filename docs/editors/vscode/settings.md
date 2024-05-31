@@ -35,6 +35,7 @@ id: settings
   },
   // Terminal.
   "terminal.integrated.fontFamily": "MesloLGM Nerd Font",
+  "terminal.integrated.fontSize": 16,
   // Prettier.
   "prettier.singleQuote": true,
   "prettier.printWidth": 120,
@@ -185,6 +186,11 @@ id: settings
       "level": "off"
     }
   },
-  "inference.endpoint": "http://localhost:11434"
+  "inference.endpoint": "http://localhost:11434",
+  "codeium.enableConfig": {
+    "*": true,
+    "markdown": true,
+    "plaintext": true
+  }
 }
 ```
