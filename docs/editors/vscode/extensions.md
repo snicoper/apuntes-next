@@ -14,7 +14,7 @@ code --install-extension aaron-bond.better-comments
 code --install-extension Codeium.codeium
 
 ## Específicos en Windows.
-code --install-extension ms-vscode.powershell
+# code --install-extension ms-vscode.powershell
 
 # Spell.
 code --install-extension streetsidesoftware.code-spell-checker
