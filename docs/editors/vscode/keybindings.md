@@ -23,11 +23,6 @@ id: keybindings
     "command": "editor.action.joinLines"
   },
   {
-    // Save all files.
-    "key": "ctrl+s",
-    "command": "saveAll"
-  },
-  {
     // Lower case.
     "key": "ctrl+alt+l",
     "command": "editor.action.transformToLowercase"

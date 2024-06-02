@@ -7,7 +7,7 @@ id: settings
 ```json
 {
   // Editor.
-  "editor.fontFamily": "'Monaspace Neon', monospace",
+  "editor.fontFamily": "Jetbrains Mono",
   "editor.fontSize": 18,
   "editor.minimap.enabled": false,
   "editor.lineHeight": 27,
@@ -54,7 +54,6 @@ id: settings
   },
   "[csharp]": {
     "editor.defaultFormatter": "ms-dotnettools.csharp",
-    "editor.formatOnType": true,
     "editor.tabSize": 4
   },
   "[markdown]": {
@@ -125,6 +124,14 @@ id: settings
     "typings"
   ],
   "cSpell.userWords": [],
+  // Vim.
+  "vim.easymotion": true,
+  "vim.incsearch": true,
+  "vim.useSystemClipboard": true,
+  "vim.useCtrlKeys": true,
+  "vim.hlsearch": true,
+  "vim.leader": "<space>",
+  "vim.vimrc.enable": true,
   // better-comments.
   "better-comments.multilineComments": true,
   "better-comments.tags": [
@@ -186,11 +193,13 @@ id: settings
       "level": "off"
     }
   },
-  "inference.endpoint": "http://localhost:11434",
+  // Codeium.
   "codeium.enableConfig": {
     "*": true,
     "markdown": true,
-    "plaintext": true
+    "plaintext": true,
+    "xml": true,
+    "editorconfig": true
   }
 }
 ```

@@ -4,17 +4,28 @@ title: "Extensions"
 id: extensions
 ---
 
+## Ver lista de extensiones instaladas
+
+```bash
+code --list-extensions | xargs -L 1 echo code --install-extension
+```
+
 ```bash
 # Editor.
 code --install-extension editorconfig.editorconfig
 code --install-extension henriiik.vscode-sort
 code --install-extension aaron-bond.better-comments
+code --install-extension humao.rest-client
+code --install-extension ms-azuretools.vscode-docker
 
 ## AI.
 code --install-extension Codeium.codeium
 
+## Vim.
+code --install-extension vscodevim.vim
+
 ## Específicos en Windows.
-# code --install-extension ms-vscode.powershell
+code --install-extension ms-vscode.powershel
 
 # Spell.
 code --install-extension streetsidesoftware.code-spell-checker
@@ -33,9 +44,9 @@ code --install-extension usernamehw.errorlens
 code --install-extension sonarsource.sonarlint-vscode
 
 # C#.
-code --install-extension ms-dotnettools.csharp
 code --install-extension ms-dotnettools.csdevkit
-code --install-extension dotnettools.vscode-dotnet-runtime
+code --install-extension ms-dotnettools.csharp
+code --install-extension ms-dotnettools.vscode-dotnet-runtime
 code --install-extension ms-dotnettools.vscodeintellicode-csharp
 
 # TypeScript.
