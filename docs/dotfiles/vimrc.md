@@ -4,7 +4,7 @@ title: "vimrc"
 id: vimrc
 ---
 
-```vim
+```bash
 set pastetoggle=<F2>
 set clipboard=unnamed
 set encoding=utf8

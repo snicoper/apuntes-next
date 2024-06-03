@@ -18,22 +18,21 @@ id: gitconfig
   lg = log --pretty=format:'%Cred%h%Creset -%C(yellow)%d%Creset %s %Cgreen(%cr %an)%Creset' --abbrev-commit --date=relative
   co = checkout
   cm = commit
-  aw = switch
+  sw = switch
   st = status
   br = branch
-[merge]
-  tool = meld
 [diff]
-  tool = meld
-[mergetool]
-  prompt = false
-  keepBackup = false
-  trustExitCode = false
-  keepTemporaries = false
+  tool = default-difftool
+[difftool "default-difftool"]
+  cmd = code --wait --diff $LOCAL $REMOTE
+[merge]
+  tool = default-mergetool
+[mergetool "default-mergetool"]
+  cmd = code --wait $MERGED
 [push]
   default = simple
 [pull]
- rebase = false
+  rebase = false
 [init]
- defaultBranch = main
+  defaultBranch = main
 ```
