@@ -8,3 +8,4 @@ id: visual-studio-extensions
 - SonarLint
 - Visual Studio Spell Checker
 - File Icons
+- Codeium
