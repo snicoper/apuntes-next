@@ -21,9 +21,9 @@ services.AddValidatorsFromAssembly(Assembly.GetExecutingAssembly());
 
 ## Middleware de MediatR
 
-### CustomValidationException
+### BadRequestException
 
-Crear excepción personalizada en `src/Application/Common/Exceptions/CustomValidationException.cs`
+Crear excepción personalizada en `src/Application/Common/Exceptions/BadRequestException.cs`
 
 ```cs
 using CleanArchitecture.Application.Common.Extensions;
@@ -31,9 +31,9 @@ using FluentValidation.Results;
 
 namespace CleanArchitecture.Application.Common.Exceptions;
 
-public class CustomValidationException() : Exception("One or more validation failures have occurred.")
+public class BadRequestException() : Exception("One or more validation failures have occurred.")
 {
-    public CustomValidationException(IReadOnlyCollection<ValidationFailure> failures)
+    public BadRequestException(IReadOnlyCollection<ValidationFailure> failures)
         : this()
     {
         Errors = failures
@@ -119,7 +119,7 @@ public class ValidationBehaviour<TRequest, TResponse>(IEnumerable<IValidator<TRe
 
         if (failures.Count != 0)
         {
-            throw new CustomValidationException(failures);
+            throw new BadRequestException(failures);
         }
 
         return await next();
@@ -141,7 +141,7 @@ config.AddBehavior(typeof(IPipelineBehavior<,>), typeof(ValidationBehaviour<,>))
 
 ## CustomExceptionHandler
 
-Editar `src/WebApi/Infrastructure/CustomExceptionHandler.cs` para manejar errores de `CustomValidationException`.
+Editar `src/WebApi/Infrastructure/CustomExceptionHandler.cs` para manejar errores de `BadRequestException`.
 
 En el constructor añadir el **handler** en `_exceptionHandlers`
 
@@ -149,7 +149,7 @@ En el constructor añadir el **handler** en `_exceptionHandlers`
 // Register known exception types and handlers.
 _exceptionHandlers = new Dictionary<Type, Func<HttpContext, Exception, Task>>
 {
-    { typeof(CustomValidationException), HandleValidationException },
+    { typeof(BadRequestException), HandleValidationException },
     { typeof(NotFoundException), HandleNotFoundException },
     { typeof(UnauthorizedAccessException), HandleUnauthorizedAccessException },
     { typeof(ForbiddenAccessException), HandleForbiddenAccessException }
@@ -161,12 +161,12 @@ Crear método HandleValidationException en la clase `CustomExceptionHandler`.
 ```cs
 private async Task HandleValidationException(HttpContext httpContext, Exception exception)
 {
-    var customValidationException = (CustomValidationException)exception;
+    var badRequestException = (BadRequestException)exception;
 
     httpContext.Response.StatusCode = StatusCodes.Status400BadRequest;
 
     await httpContext.Response.WriteAsJsonAsync(
-        new ValidationProblemDetails(customValidationException.Errors)
+        new ValidationProblemDetails(badRequestException.Errors)
         {
             Status = StatusCodes.Status400BadRequest, Type = "https://tools.ietf.org/html/rfc7231#section-6.5.1"
         });
