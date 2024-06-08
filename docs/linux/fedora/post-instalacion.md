@@ -42,11 +42,19 @@ sudo dnf -y install \
 ## Fuentes
 
 - [githubnext](https://monaspace.githubnext.com/)
-- [Meslo.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v2.0.0/Meslo.zip)
+- [Meslo.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip)
+
 
 ```bash
 mkdir -p ~/.local/share/fonts/
-cp *.otf ~/.local/share/fonts/
+
+cd Downloads
+
+unzip Meslo.zip -d meslo
+
+cp meslo/*.ttf ~/.local/share/fonts/
+
+rm -rf meslo Meslo.zip
 ```
 
 ## Idiomas
@@ -85,7 +93,7 @@ sudo dnf install code -y
 ## Flatpak
 
 ```bash
-flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
+sudo flatpak remote-add --if-not-exists flathub https://dl.flathub.org/repo/flathub.flatpakrepo
 
 # Github Desktop.
 flatpak install flathub io.github.shiftey.Desktop

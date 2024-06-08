@@ -44,12 +44,12 @@ export PATH=$PATH:$HOME/.dotnet
 source ~/.zshrc
 ```
 
-Instalación dotnet-sdk-8.0.300-linux-x64.tar.gz
+Instalación dotnet-sdk-8.0.301-linux-x64.tar.gz
 
 ```bash
 cd Downloads
-tar -C ~/.dotnet -xf dotnet-sdk-8.0.300-linux-x64.tar.gz
-rm dotnet-sdk-8.0.300-linux-x64.tar.gz
+tar -C ~/.dotnet -xf dotnet-sdk-8.0.301-linux-x64.tar.gz
+rm dotnet-sdk-8.0.301-linux-x64.tar.gz
 dotnet --info
 ```
 

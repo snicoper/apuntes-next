@@ -28,5 +28,4 @@ id: markdown
   "description": "Titulo para docusaurus"
  },
 }
-
 ```

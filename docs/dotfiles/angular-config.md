@@ -4,7 +4,7 @@ title: "angular-config"
 id: angular-config
 ---
 
-Crear en el home `angular-config.json`
+Crear en el home `.angular-config.json`
 
 ```json
 {
