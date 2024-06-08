@@ -8,6 +8,5 @@ id: dotfiles
 - [bashrc](./bashrc.md)
 - [gitconfig](./gitconfig.md)
 - [npmrc](./npmrc.md)
-- [profile](./profile.md)
 - [vimrc](./vimrc.md)
 - [zshrc](./zshrc.md)
