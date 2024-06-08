@@ -23,8 +23,8 @@ sudo dnf install dotnet-sdk-8.0
 
 Para el ejemplo se va a instalar las siguientes versiones:
 
-* dotnet-sdk-8.0.300-linux-x64.tar.gz
-* dotnet-sdk-9.0.100-preview.3.24204.13-linux-x64.tar.gz
+* `dotnet-sdk-8.0.301-linux-x64.tar.gz`
+* `dotnet-sdk-9.0.100-preview.4.24267.66-linux-x64.tar.gz`
 
 Crear directorios de instalación:
 
@@ -44,7 +44,7 @@ export PATH=$PATH:$HOME/.dotnet
 source ~/.zshrc
 ```
 
-Instalación dotnet-sdk-8.0.301-linux-x64.tar.gz
+Instalación `dotnet-sdk-8.0.301-linux-x64.tar.gz`
 
 ```bash
 cd Downloads
@@ -53,12 +53,12 @@ rm dotnet-sdk-8.0.301-linux-x64.tar.gz
 dotnet --info
 ```
 
-Instalación dotnet-sdk-9.0.100-preview.3.24204.13-linux-x64.tar.gz
+Instalación `dotnet-sdk-9.0.100-preview.4.24267.66-linux-x64.tar.gz`
 
 ```bash
 cd Downloads
-tar -C ~/.dotnet -xf dotnet-sdk-9.0.100-preview.3.24204.13-linux-x64.tar.gz
-rm dotnet-sdk-9.0.100-preview.3.24204.13-linux-x64.tar.gz
+tar -C ~/.dotnet -xf dotnet-sdk-9.0.100-preview.4.24267.66-linux-x64.tar.gz
+rm dotnet-sdk-9.0.100-preview.4.24267.66-linux-x64.tar.gz
 dotnet --info
 ```
 
@@ -78,7 +78,6 @@ Crear `global.json` en la raíz del proyecto, al nivel del `.sln`
 
 ```bash
 dotnet --version
-# 8.0.300
 ```
 
 ## Herramientas
