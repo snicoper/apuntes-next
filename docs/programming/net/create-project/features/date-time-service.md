@@ -4,21 +4,15 @@ title: "IDateTimeService"
 id: i-date-time-service
 ---
 
-Crear `src/Application/Common/Interfaces/Common/IDateTimeService.cs`
+Crear `src/Application/Common/Interfaces/IDateTimeService.cs`
 
 ```cs
-namespace CleanArchitecture.Application.Common.Interfaces.Common;
+namespace CleanArchitecture.Application.Common.Interfaces;
 
-public interface IDateTimeService
+public interface IDateTimeProvider
 {
-    /// <summary>
-    /// Obtener el <see cref="TimeProvider" />.
-    /// </summary>
     TimeProvider TimeProvider { get; }
 
-    /// <summary>
-    /// Alias de TimeProvider.GetUtcNow().
-    /// </summary>
     DateTimeOffset UtcNow { get; }
 }
 ```
@@ -26,11 +20,11 @@ public interface IDateTimeService
 Crear `src/Infrastructure/Services/Common/DateTimeService.cs`
 
 ```cs
-using CleanArchitecture.Application.Common.Interfaces.Common;
+using CleanArchitecture.Application.Common.Interfaces;
 
 namespace CleanArchitecture.Infrastructure.Services;
 
-public class DateTimeService(TimeProvider timeProvider) : IDateTimeService
+public class DateTimeProvider(TimeProvider timeProvider) : IDateTimeProvider
 {
     public TimeProvider TimeProvider { get; } = timeProvider;
 

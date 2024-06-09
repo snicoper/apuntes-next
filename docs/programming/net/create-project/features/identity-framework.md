@@ -28,7 +28,7 @@ Editar `src/WebApi/appsettings.Development.json`
 
 Cambiar el puerto según `src/WebApi/Properties/launchSettings.json`
 
-Crear `src/Application/Common/Models/Settings/Settings/JwtSettings.cs` para tipar las opciones de configuración.
+Crear `src/Application/Common/Models/Settings/JwtSettings.cs` para tipar las opciones de configuración.
 
 ```cs
 using System.ComponentModel.DataAnnotations;
@@ -62,7 +62,7 @@ public class JwtSettings
 }
 ```
 
-Editar `src/Application/Common/Models/Settings/JwtSettings.cs` y añadir
+Editar `src/Application/DependencyInjection.cs` y añadir
 
 ```cs
 // Strongly typed options validations.
@@ -95,10 +95,10 @@ using Microsoft.Extensions.Options;
 
 namespace CleanArchitecture.Application.Common.Services;
 
-public class CustomClaimsPrincipalFactory(UserManager<ApplicationUser> userManager, IOptions<IdentityOptions> optionsAccessor)
-    : UserClaimsPrincipalFactory<ApplicationUser>(userManager, optionsAccessor)
+public class CustomClaimsPrincipalFactory(UserManager<User> userManager, IOptions<IdentityOptions> optionsAccessor)
+    : UserClaimsPrincipalFactory<User>(userManager, optionsAccessor)
 {
-    protected override async Task<ClaimsIdentity> GenerateClaimsAsync(ApplicationUser user)
+    protected override async Task<ClaimsIdentity> GenerateClaimsAsync(User user)
     {
         var identity = await base.GenerateClaimsAsync(user);
 
@@ -109,9 +109,9 @@ public class CustomClaimsPrincipalFactory(UserManager<ApplicationUser> userManag
 }
 ```
 
-## ApplicationUser
+## User
 
-Crear `src/Domain/Entities/ApplicationUser.cs`
+Crear `src/Domain/Entities/User.cs`
 
 ```cs
 using System.ComponentModel.DataAnnotations.Schema;
@@ -121,7 +121,7 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CleanArchitecture.Domain.Entities;
 
-public class ApplicationUser : IdentityUser, IEntityDomainEvent
+public class User : IdentityUser, IEntityDomainEvent
 {
     private readonly List<BaseEvent> _domainEvents = new();
 
@@ -157,9 +157,9 @@ public class ApplicationUser : IdentityUser, IEntityDomainEvent
 }
 ```
 
-## ApplicationUserConfiguration
+## UserConfiguration
 
-Crear `src/Infrastructure/Data/Configurations/ApplicationUserConfiguration.cs`
+Crear `src/Infrastructure/Persistence/Configurations/UserConfiguration.cs`
 
 ```cs
 using CleanArchitecture.Domain.Entities;
@@ -168,9 +168,9 @@ using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
 namespace CleanArchitecture.Infrastructure.Configurations;
 
-internal class ApplicationUserConfiguration : IEntityTypeConfiguration<ApplicationUser>
+internal class UserConfiguration : IEntityTypeConfiguration<User>
 {
-    public void Configure(EntityTypeBuilder<ApplicationUser> builder)
+    public void Configure(EntityTypeBuilder<User> builder)
     {
         // Indexes.
         builder.HasIndex(au => au.Email)
@@ -205,13 +205,13 @@ internal class ApplicationUserConfiguration : IEntityTypeConfiguration<Applicati
 }
 ```
 
-## ApplicationDbContext
+## AppDbContext
 
-Editar `src/Infrastructure/Data/ApplicationDbContext.cs` y remplazar por:
+Editar `src/Infrastructure/Persistence/AppDbContext.cs` y remplazar por:
 
 ```cs
-public class ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-    : IdentityDbContext<ApplicationUser, IdentityRole, string>(options), IApplicationDbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options)
+    : IdentityDbContext<User, IdentityRole<Guid>, Guid>(options), IAppDbContext
 {
     // public DbSet<Department> Departments => Set<Department>();
 
@@ -235,9 +235,9 @@ Editar `src/Infrastructure/DependencyInjection.cs`.
 services.AddAuthorizationBuilder();
 
 services
-    .AddIdentityCore<ApplicationUser>()
-    .AddRoles<IdentityRole>()
-    .AddEntityFrameworkStores<ApplicationDbContext>()
+    .AddIdentityCore<User>()
+    .AddRoles<IdentityRole<Guid>>()
+    .AddEntityFrameworkStores<AppDbContext>()
     .AddClaimsPrincipalFactory<CustomClaimsPrincipalFactory>()
     .AddDefaultTokenProviders();
 
@@ -329,56 +329,67 @@ Editar `src/WebApi/Controllers/HelloController.cs` y en el método `SayHello` a�
 
 ## Migraciones
 
-Si existe, eliminar el directorio `src/Infrastructure/Data/Migrations` que se creo al añadir [EntityFramework](./entity-framework.md)
+Si existe, eliminar el directorio `src/Infrastructure/Persistence/Migrations` que se creo al añadir [EntityFramework](./entity-framework.md)
 
 ```bash
 cd src/WebApi
 
-dotnet ef migrations add Initial -p ../Infrastructure/Infrastructure.csproj  -c ApplicationDbContext  -o ../Infrastructure/Data/Migrations
+dotnet ef migrations add Initial -p ../Infrastructure/Infrastructure.csproj  -c AppDbContext  -o ../Infrastructure/Persistence/Migrations
 
-dotnet ef database update -c ApplicationDbContext
+dotnet ef database update -c AppDbContext
 ```
 
 :::danger
-**StyleCop** genera un error si se añade un `ssing` que no se utiliza, por lo que se ha de comprobar los archivos
-generados en `src/Infrastructure/Data/Migrations` y eliminar los `using` que no se usen.
+**StyleCop** genera un error si se añade un `using` que no se utiliza, por lo que se ha de comprobar los archivos
+generados en `src/Infrastructure/Persistence/Migrations` y eliminar los `using` que no se usen.
 :::
 
 ```bash
+➜ dotnet ef database update -c AppDbContext
 Build started...
 Build succeeded.
-[23:06:17 WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
-[23:06:17 INF] Executed DbCommand (61ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE DATABASE "CleanArchitecture";
-[23:06:17 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE TABLE "__EFMigrationsHistory" (
-    "MigrationId" character varying(150) NOT NULL,
-    "ProductVersion" character varying(32) NOT NULL,
-    CONSTRAINT "PK___EFMigrationsHistory" PRIMARY KEY ("MigrationId")
-);
-[23:06:17 INF] Executed DbCommand (19ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 WRN] Sensitive data logging is enabled. Log entries and exception messages may include sensitive application data; this mode should only be enabled during development.
+[01:47:50 INF] Executed DbCommand (29ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT EXISTS (
     SELECT 1 FROM pg_catalog.pg_class c
     JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
     WHERE n.nspname='public' AND
           c.relname='__EFMigrationsHistory'
 )
-[23:06:17 INF] Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 SELECT "MigrationId", "ProductVersion"
 FROM "__EFMigrationsHistory"
 ORDER BY "MigrationId";
-[23:06:17 INF] Applying migration '20240516205915_Initial'.
-[23:06:17 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+[01:47:50 INF] Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT EXISTS (
+    SELECT 1 FROM pg_catalog.pg_class c
+    JOIN pg_catalog.pg_namespace n ON n.oid=c.relnamespace
+    WHERE n.nspname='public' AND
+          c.relname='__EFMigrationsHistory'
+)
+[01:47:50 INF] Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+SELECT "MigrationId", "ProductVersion"
+FROM "__EFMigrationsHistory"
+ORDER BY "MigrationId";
+[01:47:50 INF] Applying migration '20240609234731_Initial'.
+[01:47:50 INF] Executed DbCommand (6ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE TABLE "AspNetRoles" (
-    "Id" text NOT NULL,
+    "Id" uuid NOT NULL,
     "Name" character varying(256),
     "NormalizedName" character varying(256),
     "ConcurrencyStamp" text,
     CONSTRAINT "PK_AspNetRoles" PRIMARY KEY ("Id")
 );
-[23:06:17 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE TABLE "AspNetUsers" (
-    "Id" text NOT NULL,
+    "Id" uuid NOT NULL,
     "FirstName" character varying(256) NOT NULL,
     "LastName" character varying(256) NOT NULL,
     "RefreshToken" character varying(256),
@@ -401,74 +412,70 @@ CREATE TABLE "AspNetUsers" (
     "AccessFailedCount" integer NOT NULL,
     CONSTRAINT "PK_AspNetUsers" PRIMARY KEY ("Id")
 );
-[23:06:17 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE TABLE "AspNetRoleClaims" (
     "Id" integer GENERATED BY DEFAULT AS IDENTITY,
-    "RoleId" text NOT NULL,
+    "RoleId" uuid NOT NULL,
     "ClaimType" text,
     "ClaimValue" text,
     CONSTRAINT "PK_AspNetRoleClaims" PRIMARY KEY ("Id"),
     CONSTRAINT "FK_AspNetRoleClaims_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE
 );
-[23:06:17 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE TABLE "AspNetUserClaims" (
     "Id" integer GENERATED BY DEFAULT AS IDENTITY,
-    "UserId" text NOT NULL,
+    "UserId" uuid NOT NULL,
     "ClaimType" text,
     "ClaimValue" text,
     CONSTRAINT "PK_AspNetUserClaims" PRIMARY KEY ("Id"),
     CONSTRAINT "FK_AspNetUserClaims_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
 );
-[23:06:17 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE TABLE "AspNetUserLogins" (
     "LoginProvider" text NOT NULL,
     "ProviderKey" text NOT NULL,
     "ProviderDisplayName" text,
-    "UserId" text NOT NULL,
+    "UserId" uuid NOT NULL,
     CONSTRAINT "PK_AspNetUserLogins" PRIMARY KEY ("LoginProvider", "ProviderKey"),
     CONSTRAINT "FK_AspNetUserLogins_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
 );
-[23:06:17 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE TABLE "AspNetUserRoles" (
-    "UserId" text NOT NULL,
-    "RoleId" text NOT NULL,
-    "ApplicationUserId" text,
+    "UserId" uuid NOT NULL,
+    "RoleId" uuid NOT NULL,
     CONSTRAINT "PK_AspNetUserRoles" PRIMARY KEY ("UserId", "RoleId"),
     CONSTRAINT "FK_AspNetUserRoles_AspNetRoles_RoleId" FOREIGN KEY ("RoleId") REFERENCES "AspNetRoles" ("Id") ON DELETE CASCADE,
-    CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_ApplicationUserId" FOREIGN KEY ("ApplicationUserId") REFERENCES "AspNetUsers" ("Id"),
     CONSTRAINT "FK_AspNetUserRoles_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
 );
-[23:06:17 INF] Executed DbCommand (3ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (4ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE TABLE "AspNetUserTokens" (
-    "UserId" text NOT NULL,
+    "UserId" uuid NOT NULL,
     "LoginProvider" text NOT NULL,
     "Name" text NOT NULL,
     "Value" text,
     CONSTRAINT "PK_AspNetUserTokens" PRIMARY KEY ("UserId", "LoginProvider", "Name"),
     CONSTRAINT "FK_AspNetUserTokens_AspNetUsers_UserId" FOREIGN KEY ("UserId") REFERENCES "AspNetUsers" ("Id") ON DELETE CASCADE
 );
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE INDEX "IX_AspNetRoleClaims_RoleId" ON "AspNetRoleClaims" ("RoleId");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE UNIQUE INDEX "RoleNameIndex" ON "AspNetRoles" ("NormalizedName");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE INDEX "IX_AspNetUserClaims_UserId" ON "AspNetUserClaims" ("UserId");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE INDEX "IX_AspNetUserLogins_UserId" ON "AspNetUserLogins" ("UserId");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
-CREATE INDEX "IX_AspNetUserRoles_ApplicationUserId" ON "AspNetUserRoles" ("ApplicationUserId");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE INDEX "IX_AspNetUserRoles_RoleId" ON "AspNetUserRoles" ("RoleId");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE INDEX "EmailIndex" ON "AspNetUsers" ("NormalizedEmail");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE UNIQUE INDEX "IX_AspNetUsers_Email" ON "AspNetUsers" ("Email");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE UNIQUE INDEX "IX_AspNetUsers_RefreshToken" ON "AspNetUsers" ("RefreshToken");
-[23:06:17 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (2ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 CREATE UNIQUE INDEX "UserNameIndex" ON "AspNetUsers" ("NormalizedUserName");
-[23:06:17 INF] Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
+[01:47:50 INF] Executed DbCommand (1ms) [Parameters=[], CommandType='Text', CommandTimeout='30']
 INSERT INTO "__EFMigrationsHistory" ("MigrationId", "ProductVersion")
-VALUES ('20240516205915_Initial', '8.0.5');
+VALUES ('20240609234731_Initial', '8.0.6');
 Done.
 ```

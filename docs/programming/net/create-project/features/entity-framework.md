@@ -33,16 +33,16 @@ Editar `src/WebApi/appsettings.Development.json` y añadir `ConnectionString`:
 }
 ```
 
-## IApplicationDbContext
+## IAppDbContext
 
-Crear `src/Application/Common/Interfaces/Data/IApplicationDbContext.cs`
+Crear `src/Application/Common/Interfaces/Persistence/IAppDbContext.cs`
 
 ```cs
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace CleanArchitecture.Application.Common.Interfaces.Data;
+namespace CleanArchitecture.Application.Common.Interfaces.Persistence;
 
-public interface IApplicationDbContext
+public interface IAppDbContext
 {
     // DbSet<Department> Departments { get; }
 
@@ -52,27 +52,21 @@ public interface IApplicationDbContext
 }
 ```
 
-## ApplicationDbContext
+## AppDbContext
 
-Crear `src/Infrastructure/Data/ApplicationDbContext.cs`
+Crear `src/Infrastructure/Persistence/AppDbContext.cs`
 
 ```cs
 using System.Reflection;
-using CleanArchitecture.Application.Common.Interfaces.Data;
+using CleanArchitecture.Application.Common.Interfaces.Persistence;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 
-namespace CleanArchitecture.Infrastructure.Data;
+namespace CleanArchitecture.Infrastructure.Persistence;
 
-public class ApplicationDbContext : DbContext, IApplicationDbContext
+public class AppDbContext(DbContextOptions<AppDbContext> options) : DbContext(options), IAppDbContext
 {
-    public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
-        : base(options)
-    {
-    }
-
     // public DbSet<Department> Departments => Set<Department>();
-
     public new DatabaseFacade Database => base.Database;
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -167,13 +161,13 @@ public abstract class BaseAuditableEntity : BaseEntity
 
 ## Interceptors
 
-Crear `src/Infrastructure/Data/Extensions/EntityEntryExtensions.cs`
+Crear `src/Infrastructure/Persistence/Extensions/EntityEntryExtensions.cs`
 
 ```cs
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.ChangeTracking;
 
-namespace CleanArchitecture.Infrastructure.Data.Extensions;
+namespace CleanArchitecture.Infrastructure.Persistence.Extensions;
 
 public static class EntityEntryExtensions
 {
@@ -189,7 +183,7 @@ public static class EntityEntryExtensions
 
 Para "automatizar" los valores de `BaseAuditableEntity` al crear o actualizar datos en la base de datos.
 
-Crear `src/Infrastructure/Data/Interceptors/DispatchDomainEventsInterceptor.cs`
+Crear `src/Infrastructure/Persistence/Interceptors/DispatchDomainEventsInterceptor.cs`
 
 ```cs
 using CleanArchitecture.Domain.Interfaces;
@@ -197,7 +191,7 @@ using MediatR;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace CleanArchitecture.Infrastructure.Data.Interceptors;
+namespace CleanArchitecture.Infrastructure.Persistence.Interceptors;
 
 public class DispatchDomainEventsInterceptor(IMediator mediator) : SaveChangesInterceptor
 {
@@ -246,19 +240,19 @@ public class DispatchDomainEventsInterceptor(IMediator mediator) : SaveChangesIn
 }
 ```
 
-Crear `src/Infrastructure/Data/Interceptors/AuditableEntityInterceptor.cs`
+Crear `src/Infrastructure/Persistence/Interceptors/AuditableEntityInterceptor.cs`
 
 ```cs
 using CleanArchitecture.Application.Common.Interfaces.Common;
 using CleanArchitecture.Application.Common.Interfaces.Users;
 using CleanArchitecture.Domain.Common;
-using CleanArchitecture.Infrastructure.Data.Extensions;
+using CleanArchitecture.Infrastructure.Persistence.Extensions;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 
-namespace CleanArchitecture.Infrastructure.Data.Interceptors;
+namespace CleanArchitecture.Infrastructure.Persistence.Interceptors;
 
-public class AuditableEntityInterceptor(ICurrentUserService currentUserService, IDateTimeService dateTimeService)
+public class AuditableEntityInterceptor(ICurrentUserService currentUserService, IDateTimeProvider dateTimeProvider)
     : SaveChangesInterceptor
 {
     public override InterceptionResult<int> SavingChanges(DbContextEventData eventData, InterceptionResult<int> result)
@@ -290,7 +284,7 @@ public class AuditableEntityInterceptor(ICurrentUserService currentUserService, 
             if (entry.State is EntityState.Added)
             {
                 entry.Entity.CreatedBy = currentUserService.Id;
-                entry.Entity.Created = dateTimeService.UtcNow;
+                entry.Entity.Created = dateTimeProvider.UtcNow;
             }
 
             if (entry.State != EntityState.Added && entry.State != EntityState.Modified && !entry.HasChangedOwnedEntities())
@@ -299,7 +293,7 @@ public class AuditableEntityInterceptor(ICurrentUserService currentUserService, 
             }
 
             entry.Entity.LastModifiedBy = currentUserService.Id;
-            entry.Entity.LastModified = dateTimeService.UtcNow;
+            entry.Entity.LastModified = dateTimeProvider.UtcNow;
         }
     }
 }
@@ -308,15 +302,15 @@ public class AuditableEntityInterceptor(ICurrentUserService currentUserService, 
 
 ## Manage Seeds
 
-Crear `src/Infrastructure/Data/Seeds/ApplicationDbContextInitialize.cs`
+Crear `src/Infrastructure/Persistence/Seeds/AppDbContextInitialize.cs`
 
 ```cs
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
-namespace CleanArchitecture.Infrastructure.Data.Seeds;
+namespace CleanArchitecture.Infrastructure.Persistence.Seeds;
 
-public class ApplicationDbContextInitialize(ApplicationDbContext context, ILogger<ApplicationDbContextInitialize> logger)
+public class AppDbContextInitialize(AppDbContext context, ILogger<AppDbContextInitialize> logger)
 {
     public async Task InitialiseAsync()
     {
@@ -354,13 +348,13 @@ public class ApplicationDbContextInitialize(ApplicationDbContext context, ILogge
 }
 ```
 
-Crear `src/Infrastructure/Data/Seeds/InitialiseExtensions.cs`
+Crear `src/Infrastructure/Persistence/Seeds/InitialiseExtensions.cs`
 
 ```cs
 using Microsoft.AspNetCore.Builder;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CleanArchitecture.Infrastructure.Data.Seeds;
+namespace CleanArchitecture.Infrastructure.Persistence.Seeds;
 
 public static class InitialiseExtensions
 {
@@ -368,7 +362,7 @@ public static class InitialiseExtensions
     {
         using var scope = app.Services.CreateScope();
 
-        var initialise = scope.ServiceProvider.GetRequiredService<ApplicationDbContextInitialize>();
+        var initialise = scope.ServiceProvider.GetRequiredService<AppDbContextInitialize>();
 
         await initialise.InitialiseAsync();
 
@@ -411,7 +405,7 @@ services.AddScoped<ISaveChangesInterceptor, AuditableEntityInterceptor>();
 services.AddScoped<ISaveChangesInterceptor, DispatchDomainEventsInterceptor>();
 
 // Db service.
-services.AddDbContext<ApplicationDbContext>(
+services.AddDbContext<AppDbContext>(
     (provider, options) =>
     {
         options.AddInterceptors(provider.GetServices<ISaveChangesInterceptor>());
@@ -424,8 +418,8 @@ services.AddDbContext<ApplicationDbContext>(
         }
     });
 
-services.AddScoped<IApplicationDbContext>(provider => provider.GetRequiredService<ApplicationDbContext>());
-services.AddScoped<ApplicationDbContextInitialize>();
+services.AddScoped<IAppDbContext>(provider => provider.GetRequiredService<AppDbContext>());
+services.AddScoped<AppDbContextInitialize>();
 ```
 
 Editar `src/WebApi/DependencyInjection.cs` y añadir:
@@ -439,9 +433,9 @@ services.AddDatabaseDeveloperPageExceptionFilter();
 ```bash
 cd src/WebApi
 
-dotnet ef migrations add Initial -p ../Infrastructure/Infrastructure.csproj  -c ApplicationDbContext  -o ../Infrastructure/Data/Migrations
+dotnet ef migrations add Initial -p ../Infrastructure/Infrastructure.csproj  -c AppDbContext  -o ../Infrastructure/Persistence/Migrations
 
-dotnet ef database update -c ApplicationDbContext
+dotnet ef database update -c AppDbContext
 ```
 
 ```bash
