@@ -15,7 +15,7 @@ Algunas implementaciones pueden depender de otras, este es el orden que las impl
 - [AutoMapper](./auto-mapper.md)
 - [Scrutor](./scrutor.md)
 - [CurrentUserService](./current-user-service.md)
-- [IDateTimeService](./date-time-service.md)
+- [IDateTimeProvider](./date-time-provider.md)
 - [EntityFramework](./entity-framework.md)
 - [IdentityFramework](./identity-framework.md)
 - [Swashbuckle](./swashbuckle.md)

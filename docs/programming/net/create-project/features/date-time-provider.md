@@ -1,10 +1,10 @@
 ---
 sidebar_position: 1
-title: "IDateTimeService"
+title: "IDateTimeProvider"
 id: i-date-time-service
 ---
 
-Crear `src/Application/Common/Interfaces/IDateTimeService.cs`
+Crear `src/Application/Common/Interfaces/IDateTimeProvider.cs`
 
 ```cs
 namespace CleanArchitecture.Application.Common.Interfaces;
@@ -17,7 +17,7 @@ public interface IDateTimeProvider
 }
 ```
 
-Crear `src/Infrastructure/Services/Common/DateTimeService.cs`
+Crear `src/Infrastructure/Services/Common/DateTimeProvider.cs`
 
 ```cs
 using CleanArchitecture.Application.Common.Interfaces;
@@ -36,5 +36,5 @@ Editar `src/Infrastructure/DependencyInjection.cs` y añadir.
 
 ```cs
 services.AddSingleton(TimeProvider.System);
-services.AddScoped<IDateTimeService, DateTimeService>();
+services.AddScoped<IDateTimeProvider, DateTimeProvider>();
 ```
