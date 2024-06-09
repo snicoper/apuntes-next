@@ -1,7 +1,7 @@
 ---
 sidebar_position: 1
 title: "IDateTimeProvider"
-id: i-date-time-service
+id: i-date-time-provider
 ---
 
 Crear `src/Application/Common/Interfaces/IDateTimeProvider.cs`
