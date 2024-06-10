@@ -35,16 +35,16 @@ public class EmailSenderSettings
     public const string SectionName = "EmailSender";
 
     [Required]
-    public string? Host { get; set; }
+    public string Host { get; set; } = default!;
 
     [Required]
-    public string? DefaultFrom { get; set; }
+    public string DefaultFrom { get; set; } = default!;
 
     [Required]
-    public string? Username { get; set; }
+    public string Username { get; set; } = default!;
 
     [Required]
-    public string? Password { get; set; }
+    public string Password { get; set; } = default!;
 
     [Required]
     public int Port { get; set; }
@@ -52,7 +52,6 @@ public class EmailSenderSettings
     [Required]
     public bool UseSsl { get; set; }
 }
-
 ```
 
 Editar `src/Application/DependencyInjection.cs`
@@ -74,7 +73,7 @@ services.AddOptions<EmailSenderSettings>()
     .ValidateOnStart();
 ```
 
-Editar `src/WebApi/DependencyInjection.cs` para pasar el argumento `IConfiguration configuration`:
+Editar `src/WebApi/Program.cs` para pasar el argumento `IConfiguration configuration`:
 
 ```cs
 .AddApplication(builder.Configuration)
@@ -117,47 +116,20 @@ namespace CleanArchitecture.Application.Common.Interfaces.Emails;
 
 public interface IEmailService
 {
-    /// <summary>
-    /// Prioridad del Email, por defecto High.
-    /// </summary>
     MailPriority MailPriority { get; set; }
 
-    /// <summary>
-    /// Quien envía el Email.
-    /// </summary>
     string? From { get; set; }
 
-    /// <summary>
-    /// Lista de destinatarios.
-    /// </summary>
     ICollection<string> To { get; set; }
 
-    /// <summary>
-    /// Titulo del Email.
-    /// </summary>
     string? Subject { get; set; }
 
-    /// <summary>
-    /// Cuerpo del mensaje.
-    /// </summary>
     string? Body { get; set; }
 
-    /// <summary>
-    /// Enviar el Body como HTML.
-    /// </summary>
     bool IsBodyHtml { get; set; }
 
-    /// <summary>
-    /// Envía un Email.
-    /// </summary>
     void SendMail();
 
-    /// <summary>
-    /// Envía un Email utilizando una plantilla y un modelo.
-    /// </summary>
-    /// <param name="viewName">Nombre de la vista.</param>
-    /// <param name="model">Datos para la vista.</param>
-    /// <typeparam name="TModel">Clase del Modelo.</typeparam>
     Task SendMailWithViewAsync<TModel>(string viewName, TModel model)
         where TModel : class;
 }
@@ -194,10 +166,10 @@ namespace CleanArchitecture.Infrastructure.Services.Emails;
 
 public class EmailService : IEmailService
 {
-    private readonly EmailSenderSettings emailSenderSettings;
-    private readonly IHostEnvironment environment;
-    private readonly ILogger<EmailService> logger;
-    private readonly IRazorViewToStringRendererService razorViewToStringRendererService;
+    private readonly EmailSenderSettings _emailSenderSettings;
+    private readonly IHostEnvironment _environment;
+    private readonly ILogger<EmailService> _logger;
+    private readonly IRazorViewToStringRendererService _razorViewToStringRendererService;
 
     public EmailService(
         IOptions<EmailSenderSettings> options,
@@ -205,13 +177,13 @@ public class EmailService : IEmailService
         IHostEnvironment environment,
         IRazorViewToStringRendererService razorViewToStringRendererService)
     {
-        this.logger = logger;
-        this.environment = environment;
-        this.razorViewToStringRendererService = razorViewToStringRendererService;
-        emailSenderSettings = options.Value;
+        _logger = logger;
+        _environment = environment;
+        _razorViewToStringRendererService = razorViewToStringRendererService;
+        _emailSenderSettings = options.Value;
 
         MailPriority = MailPriority.High;
-        From = emailSenderSettings.DefaultFrom;
+        From = _emailSenderSettings.DefaultFrom;
         IsBodyHtml = true;
     }
 
@@ -232,7 +204,7 @@ public class EmailService : IEmailService
     {
         IsBodyHtml = true;
 
-        Body = await razorViewToStringRendererService.RenderViewToStringAsync(
+        Body = await _razorViewToStringRendererService.RenderViewToStringAsync(
             viewName,
             model,
             new Dictionary<string, object?>());
@@ -254,16 +226,16 @@ public class EmailService : IEmailService
         mailMessage.Priority = MailPriority;
 
         using var client = new SmtpClient();
-        client.Host = emailSenderSettings.Host ?? string.Empty;
-        client.Port = emailSenderSettings.Port;
-        client.Credentials = new NetworkCredential(emailSenderSettings.Username, emailSenderSettings.Password);
+        client.Host = _emailSenderSettings.Host;
+        client.Port = _emailSenderSettings.Port;
+        client.Credentials = new NetworkCredential(_emailSenderSettings.Username, _emailSenderSettings.Password);
         client.UseDefaultCredentials = false;
         client.EnableSsl = true;
 
         ValidateEmail();
 
         // Solo en Production se envían los mensajes por SMTP.
-        if (!environment.IsProduction())
+        if (!_environment.IsProduction())
         {
             LoggerMessage();
             return;
@@ -293,7 +265,7 @@ public class EmailService : IEmailService
     private void LoggerMessage()
     {
         var to = string.Join(", ", To);
-        var body = !environment.IsProduction() ? Body : "Body here.....";
+        var body = !_environment.IsProduction() ? Body : "Body here.....";
 
         var stringBuilder = new StringBuilder();
         stringBuilder.Append("=========================================================\n");
@@ -304,7 +276,7 @@ public class EmailService : IEmailService
         stringBuilder.Append($"Body: {body}\n");
         stringBuilder.Append("=========================================================\n");
 
-        logger.LogDebug("{LogEmail}", stringBuilder);
+        _logger.LogDebug("{LogEmail}", stringBuilder);
     }
 }
 ```
@@ -412,6 +384,8 @@ Crear `src/WebApi/Views/_ViewStart.cshtml`
   Layout = "_Layout";
 }
 ```
+
+Crear `src/WebApi/Views/_ViewImports.cshtml`
 
 ```html
 @using CleanArchitecture.Application.Common.Models.Emails
