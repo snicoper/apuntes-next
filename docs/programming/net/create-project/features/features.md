@@ -26,3 +26,13 @@ Algunas implementaciones pueden depender de otras, este es el orden que las impl
 - [RequestData y ResponseData](./request-response-data.md)
 - [Authorize](./authorize.md)
 - [ValueObject](./value-object.md)
+
+## Pendientes de revisión
+
+- [Swashbuckle](./swashbuckle.md)
+- [API Versioning](./versioning.md)
+- [Cors](./cors.md)
+- [RequestData y ResponseData](./request-response-data.md)
+- [Authorize](./authorize.md)
+- [AutoMapper](./auto-mapper.md)
+- [Scrutor](./scrutor.md)
