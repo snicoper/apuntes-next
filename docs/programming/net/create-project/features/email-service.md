@@ -118,7 +118,7 @@ public interface IEmailService
 {
     MailPriority MailPriority { get; set; }
 
-    string? From { get; set; }
+    string From { get; set; }
 
     ICollection<string> To { get; set; }
 
@@ -169,29 +169,29 @@ public class EmailService : IEmailService
     private readonly EmailSenderSettings _emailSenderSettings;
     private readonly IHostEnvironment _environment;
     private readonly ILogger<EmailService> _logger;
-    private readonly IRazorViewToStringRendererService _razorViewToStringRendererService;
+    private readonly IRazorViewToStringRenderer _razorViewToStringRenderer;
 
     public EmailService(
         IOptions<EmailSenderSettings> options,
         ILogger<EmailService> logger,
         IHostEnvironment environment,
-        IRazorViewToStringRendererService razorViewToStringRendererService)
+        IRazorViewToStringRenderer razorViewToStringRenderer)
     {
         _logger = logger;
         _environment = environment;
-        _razorViewToStringRendererService = razorViewToStringRendererService;
+        _razorViewToStringRenderer = razorViewToStringRenderer;
         _emailSenderSettings = options.Value;
 
         MailPriority = MailPriority.High;
         From = _emailSenderSettings.DefaultFrom;
-        IsBodyHtml = true;
+        IsBodyHtml = false;
     }
 
     public MailPriority MailPriority { get; set; }
 
-    public string? From { get; set; }
+    public string From { get; set; }
 
-    public ICollection<string> To { get; set; } = new List<string>();
+    public ICollection<string> To { get; set; } = [];
 
     public string? Subject { get; set; }
 
@@ -203,11 +203,7 @@ public class EmailService : IEmailService
         where TModel : class
     {
         IsBodyHtml = true;
-
-        Body = await _razorViewToStringRendererService.RenderViewToStringAsync(
-            viewName,
-            model,
-            new Dictionary<string, object?>());
+        Body = await _razorViewToStringRenderer.RenderViewToStringAsync(viewName, model, []);
 
         Send();
     }
@@ -219,7 +215,9 @@ public class EmailService : IEmailService
 
     private void Send()
     {
-        using var mailMessage = new MailMessage("snicoper@outlook.com", "snicoper@gmail.com");
+        using var mailMessage = new MailMessage();
+        mailMessage.From = new MailAddress(From);
+        mailMessage.To.Add(string.Join(",", To));
         mailMessage.Subject = Subject;
         mailMessage.Body = Body;
         mailMessage.IsBodyHtml = IsBodyHtml;
