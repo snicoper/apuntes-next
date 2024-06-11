@@ -17,10 +17,11 @@ namespace EmployeeControl.Domain.Common;
 
 public class Result
 {
-    protected Result(bool succeeded, Dictionary<string, string[]> errors)
+    protected Result(bool succeeded, Dictionary<string, string[]> errors, int status = StatusCodes.Status200OK)
     {
         Succeeded = succeeded;
         Errors = errors;
+        Status = status;
     }
 
     public bool Succeeded { get; private set; }
@@ -29,14 +30,14 @@ public class Result
 
     public IDictionary<string, string[]> Errors { get; }
 
-    public static Result Create()
+    public static Result Create(bool succeeded = true, int status = StatusCodes.Status200OK)
     {
-        return new Result(true, []);
+        return new Result(succeeded, [], status);
     }
 
-    public static Result<TValue> Create<TValue>(TValue? value)
+    public static Result<TValue> Create<TValue>(TValue? value, bool succeeded = true, int status = StatusCodes.Status200OK)
     {
-        return new Result<TValue>(value, true, []);
+        return new Result<TValue>(value, succeeded, [], status);
     }
 
     public static Result Success()
@@ -51,46 +52,86 @@ public class Result
 
     public static Result Failure(Dictionary<string, string[]> errors)
     {
-        return new Result(false, errors);
+        return new Result(false, errors, StatusCodes.Status400BadRequest);
     }
 
     public static Result<TValue> Failure<TValue>(Dictionary<string, string[]> errors)
     {
-        return new Result<TValue>(default, false, errors);
+        return new Result<TValue>(default, false, errors, StatusCodes.Status400BadRequest);
     }
 
     public static Result Failure(string code, string[] errors)
     {
-        var result = Create();
+        var result = Create(false, StatusCodes.Status400BadRequest);
         result.Errors.Add(code, errors);
-        result.Succeeded = false;
 
         return result;
     }
 
     public static Result<TValue> Failure<TValue>(string code, string[] errors)
     {
-        var result = Create<TValue>(default);
+        var result = Create<TValue>(default, false, StatusCodes.Status400BadRequest);
         result.Errors.Add(code, errors);
-        result.Succeeded = false;
 
         return result;
     }
 
     public static Result Failure(string code, string error)
     {
-        var result = Create();
+        var result = Create(false, StatusCodes.Status400BadRequest);
         result.AddError(code, error);
-        result.Succeeded = false;
 
         return result;
     }
 
     public static Result<TValue> Failure<TValue>(string code, string error)
     {
-        var result = Create<TValue>(default);
+        var result = Create<TValue>(default, false, StatusCodes.Status400BadRequest);
         result.AddError(code, error);
-        result.Succeeded = false;
+
+        return result;
+    }
+
+    public static Result NotFound(string name, object key)
+    {
+        var result = Create(false, StatusCodes.Status404NotFound);
+        result.AddError("NotFound", $"Entity \"{name}\" ({key}) was not found.");
+
+        return result;
+    }
+
+    public static Result<TValue> NotFound<TValue>(string name, object key)
+    {
+        var result = Create<TValue>(default, false, StatusCodes.Status404NotFound);
+        result.AddError("NotFound", $"Entity \"{name}\" ({key}) was not found.");
+
+        return result;
+    }
+
+    public static Result Unauthorized()
+    {
+        var result = Create(false, StatusCodes.Status401Unauthorized);
+
+        return result;
+    }
+
+    public static Result<TValue> Unauthorized<TValue>()
+    {
+        var result = Create<TValue>(default, false, StatusCodes.Status401Unauthorized);
+
+        return result;
+    }
+
+    public static Result Forbidden()
+    {
+        var result = Create(false, StatusCodes.Status403Forbidden);
+
+        return result;
+    }
+
+    public static Result<TValue> Forbidden<TValue>()
+    {
+        var result = Create<TValue>(default, false, StatusCodes.Status403Forbidden);
 
         return result;
     }
@@ -98,6 +139,15 @@ public class Result
     public void AddError(string code, string error)
     {
         Succeeded = false;
+
+        if (Errors.TryGetValue(code, out var value))
+        {
+            var newValue = value.Append(error).ToArray();
+            Errors[code] = newValue;
+
+            return;
+        }
+
         Errors.Add(code, [error]);
     }
 }
@@ -105,8 +155,12 @@ public class Result
 #pragma warning disable SA1402 // File may only contain a single type
 public class Result<TValue> : Result
 {
-    protected internal Result(TValue? value, bool succeeded, Dictionary<string, string[]> errors)
-        : base(succeeded, errors)
+    protected internal Result(
+        TValue? value,
+        bool succeeded,
+        Dictionary<string, string[]> errors,
+        int status = StatusCodes.Status200OK)
+        : base(succeeded, errors, status)
     {
         Value = value;
     }
