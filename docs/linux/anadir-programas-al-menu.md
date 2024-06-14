@@ -7,9 +7,9 @@ id: anadir-programas-al-menu
 ## Rider
 
 ```bash
-gzip -d JetBrains.Rider-2024.1.2.tar.gz
-tar -xvf JetBrains.Rider-2024.1.2.tar
-mv JetBrains\ Rider-2024.1.2 ~/.local/apps/rider
+gzip -d JetBrains.Rider-2024.1.3.tar.gz
+tar -xvf JetBrains.Rider-2024.1.3.tar
+mv JetBrains\ Rider-2024.1.3 ~/.local/apps/rider
 chmod +x ~/.local/apps/rider/bin/rider.sh
 ln -s ~/.local/apps/rider/bin/rider.sh ~/.local/bin/rider
 ```
