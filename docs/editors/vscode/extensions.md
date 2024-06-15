@@ -20,6 +20,7 @@ code --install-extension ms-azuretools.vscode-docker
 ## Http client.
 code --install-extension rangav.vscode-thunder-client
 code --install-extension bruno-api-client.bruno
+code --install-extension humao.rest-client
 
 ## AI.
 code --install-extension Codeium.codeium
