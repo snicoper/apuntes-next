@@ -22,17 +22,18 @@ sudo dnf -y install \
     dejavu-sans-mono-fonts \
     gcc \
     gcc-c++ \
-    google-chrome-stable \
     git \
+    google-chrome-stable \
     hunspell-es \
     jetbrains-mono-fonts \
     kernel-devel \
     kernel-headers \
+    openrgb \
+    openssl \
     p7zip \
     p7zip-plugins \
     powerline \
     powerline-fonts \
-    openssl \
     unrar \
     vim \
     wget \
