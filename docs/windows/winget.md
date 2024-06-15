@@ -17,7 +17,7 @@ winget install -e --id Transmission.Transmission
 winget install -e --id dbeaver.dbeaver
 winget install -e --id Git.Git
 winget install -e --id GitHub.GitHubDesktop
-winget install -e --id Insomnia.Insomnia
+winget install -e --id Bruno.Bruno
 winget install -e --id Docker.DockerDesktop
 winget install -e --id Microsoft.PowerToys
 winget install -e --id CoreyButler.NVMforWindows

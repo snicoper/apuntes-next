@@ -44,7 +44,6 @@ sudo dnf -y install \
 - [githubnext](https://monaspace.githubnext.com/)
 - [Meslo.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip)
 
-
 ```bash
 mkdir -p ~/.local/share/fonts/
 
@@ -106,6 +105,9 @@ flatpak install flathub com.getpostman.Postman
 
 # Insomnia.
 flatpak install flathub rest.insomnia.Insomnia
+
+# Bruno API Client.
+flatpak install flathub com.usebruno.Bruno
 
 # Microsoft Teams.
 flatpak install flathub com.github.IsmaelMartinez.teams_for_linux

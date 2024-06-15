@@ -15,9 +15,11 @@ code --list-extensions | xargs -L 1 echo code --install-extension
 code --install-extension editorconfig.editorconfig
 code --install-extension henriiik.vscode-sort
 code --install-extension aaron-bond.better-comments
-code --install-extension humao.rest-client
 code --install-extension ms-azuretools.vscode-docker
-code --install-extension VASubasRaj.flashpost
+
+## Http client.
+code --install-extension rangav.vscode-thunder-client
+code --install-extension bruno-api-client.bruno
 
 ## AI.
 code --install-extension Codeium.codeium
