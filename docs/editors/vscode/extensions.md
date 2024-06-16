@@ -53,10 +53,12 @@ code --install-extension ms-dotnettools.csdevkit
 code --install-extension ms-dotnettools.csharp
 code --install-extension ms-dotnettools.vscode-dotnet-runtime
 code --install-extension ms-dotnettools.vscodeintellicode-csharp
+# code --install-extension pierre3.csharp-to-plantuml
 
 # TypeScript.
 code --install-extension mariusalchimavicius.json-to-ts
 code --install-extension yoavbls.pretty-ts-errors
+# code --install-extension AlexShen.classdiagram-ts
 
 # Angular.
 code --install-extension cyrilletuzi.angular-schematics

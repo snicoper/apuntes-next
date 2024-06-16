@@ -28,6 +28,7 @@ sudo dnf -y install \
     jetbrains-mono-fonts \
     kernel-devel \
     kernel-headers \
+    neofetch \
     openrgb \
     openssl \
     p7zip \
