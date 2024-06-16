@@ -16,6 +16,7 @@ code --install-extension editorconfig.editorconfig
 code --install-extension henriiik.vscode-sort
 code --install-extension aaron-bond.better-comments
 code --install-extension ms-azuretools.vscode-docker
+code --install-extension hediet.vscode-drawio
 
 ## Http client.
 code --install-extension rangav.vscode-thunder-client
