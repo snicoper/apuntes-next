@@ -7,5 +7,4 @@ id: visual-studio-extensions
 - ResXManager
 - SonarLint
 - Visual Studio Spell Checker
-- File Icons
 - Codeium

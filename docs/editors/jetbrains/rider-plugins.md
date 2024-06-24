@@ -4,7 +4,6 @@ title: "Rider plugins"
 id: rider-plugins
 ---
 
-- Atom Material Icons
 - Hunspell
 - SonarLint
 - Codeium
