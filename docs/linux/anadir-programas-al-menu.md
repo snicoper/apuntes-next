@@ -4,6 +4,10 @@ title: "Añadir programas al menu"
 id: anadir-programas-al-menu
 ---
 
+```bash
+mkdir -p ~/.local/bin ~/.local/apps
+```
+
 ## Rider
 
 ```bash

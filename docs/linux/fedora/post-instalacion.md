@@ -43,6 +43,7 @@ sudo dnf -y install \
 
 ## Fuentes
 
+* [https://www.nerdfonts.com/font-downloads](https://www.nerdfonts.com/font-downloads)
 - [githubnext](https://monaspace.githubnext.com/)
 - [Meslo.zip](https://github.com/ryanoasis/nerd-fonts/releases/download/v3.2.1/Meslo.zip)
 
@@ -52,10 +53,13 @@ mkdir -p ~/.local/share/fonts/
 cd Downloads
 
 unzip Meslo.zip -d meslo
+unzip JetBrainsMono.zip -d jetbrains
 
 cp meslo/*.ttf ~/.local/share/fonts/
+cp jetbrains/*.ttf ~/.local/share/fonts/
 
 rm -rf meslo Meslo.zip
+rm -rf jetbrains JetBrainsMono.zip
 ```
 
 ## Idiomas

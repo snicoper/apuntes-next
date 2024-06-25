@@ -1,6 +1,6 @@
 ---
 sidebar_position: 1
-title: "NodeJS"
+title: 'NodeJS'
 id: nodejs
 ---
 
@@ -18,4 +18,9 @@ sudo dnf install nodejs
 
 ```bash
 curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.39.7/install.sh | bash
+```
+
+```bash
+nvm install 20
+nvm use 20
 ```

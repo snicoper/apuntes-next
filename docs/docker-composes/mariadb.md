@@ -4,7 +4,7 @@ title: "Maria DB"
 ---
 
 ```yml
-version: "3"
+version: "3.9"
 services:
   db:
     image: mariadb

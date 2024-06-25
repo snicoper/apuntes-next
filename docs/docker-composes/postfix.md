@@ -8,7 +8,7 @@ title: "Postfix"
 # https://github.com/docker-mailserver/docker-mailserver
 # POR PROBAR
 
-version: "3"
+version: "3.9"
 services:
   mailserver:
     image: docker.io/mailserver/docker-mailserver:latest
