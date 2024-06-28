@@ -16,13 +16,13 @@ winget install JanDeDobbeleer.OhMyPosh -s winget
 
 ## Instalar fuentes
 
-Abrir **PowerShell** como administrador, instalar **Meslo**.
+Abrir **PowerShell** como administrador, instalar **Meslo**, **JetBrainsMono**.
 
 ```bash
 oh-my-posh font install
 ```
 
-`Settings` -> `PowerShell` -> `Appearance Font Face`: `MesloGL Nerd Font`
+`Settings` -> `PowerShell` -> `Appearance Font Face`: `JetBrainsMono Nerd Font`
 
 ## Instalar PSReadLine
 

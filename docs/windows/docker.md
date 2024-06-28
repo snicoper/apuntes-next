@@ -7,7 +7,8 @@ id: docker
 ## Install WSL
 
 ```bash
-wsl --install
+## wsl --install
+wsl --update
 ```
 
 [https://docs.docker.com/desktop/install/windows-install/](https://docs.docker.com/desktop/install/windows-install/)
